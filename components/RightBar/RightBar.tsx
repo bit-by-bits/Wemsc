@@ -1,8 +1,6 @@
 "use client";
 
 import urls from "@/URL";
-import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { FC, useMemo, useState } from "react";
 import { GoHome, GoHomeFill } from "react-icons/go";

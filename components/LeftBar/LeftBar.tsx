@@ -20,7 +20,7 @@ import LeftBarMenu from "./LeftBarMenu";
 
 const LeftBar: FC = () => {
   const path = usePathname();
-  const [open, setOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   const features = useMemo<LeftBarItem[]>(
     () => [
@@ -90,24 +90,24 @@ const LeftBar: FC = () => {
     [features, libraries]
   );
 
-  const toggleOpen = () => setOpen((prev) => !prev);
+  const toggleIsOpen = () => setIsOpen((prev) => !prev);
 
   return (
     <div
-      className={`flex flex-col items-center h-screen p-4 w-${
-        open ? "1/4" : "5vw"
-      } bg-menu-bg transition-all duration-300`}
+      className={`flex flex-col items-center h-screen p-4 w-[${
+        isOpen ? "2" : ""
+      }5vw] bg-menu-bg transition-all duration-300`}
     >
       <div
         className={`flex flex-${
-          open ? "row" : "col gap-4"
+          isOpen ? "row" : "col gap-4"
         } items-center justify-between w-full mb-4`}
       >
         <Link href={urls.HOME}>
           <Image src="/wemsc.png" alt="logo" height={40} width={40} />
         </Link>
-        <div className="hover:cursor-pointer" onClick={toggleOpen}>
-          {open ? (
+        <div className="hover:cursor-pointer" onClick={toggleIsOpen}>
+          {isOpen ? (
             <RiMenuFoldLine className="text-2xl hover:text-white" />
           ) : (
             <RiMenuUnfoldLine className="text-2xl hover:text-white" />
@@ -116,7 +116,7 @@ const LeftBar: FC = () => {
       </div>
 
       {menus.map((e, i) => (
-        <LeftBarMenu key={i} label={e.label} items={e.items} isOpen={open} />
+        <LeftBarMenu key={i} label={e.label} items={e.items} isOpen={isOpen} />
       ))}
     </div>
   );

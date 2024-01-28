@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
-import TopBar from "@/components/TopBar";
+import TopBar from "@/components/TopBar/TopBar";
 import LeftBar from "@/components/LeftBar/LeftBar";
 import RightBar from "@/components/RightBar/RightBar";
 
