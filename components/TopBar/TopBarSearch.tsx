@@ -1,5 +1,4 @@
-import { 
-  FC } from "react";
+import { FC } from "react";
 import { LuMusic, LuSearch } from "react-icons/lu";
 import { MdClear } from "react-icons/md";
 import { TopBarSearchProps } from "./Interfaces";

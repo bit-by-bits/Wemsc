@@ -44,7 +44,7 @@ const RightBar: FC = () => {
         active: path === urls.COLLECTIONS,
       },
     ],
-    [path]
+    [path],
   );
 
   const libraries = useMemo<LeftBarItem[]>(
@@ -71,7 +71,7 @@ const RightBar: FC = () => {
         active: path === urls.LOCAL_FILES,
       },
     ],
-    [path]
+    [path],
   );
 
   const menus = useMemo<LeftBarMenu[]>(
@@ -85,10 +85,10 @@ const RightBar: FC = () => {
         items: libraries,
       },
     ],
-    [features, libraries]
+    [features, libraries],
   );
 
-  const toggleOpen = () => setOpen((prev) => !prev);
+  const toggleOpen = () => setOpen(prev => !prev);
 
   return (
     <div
