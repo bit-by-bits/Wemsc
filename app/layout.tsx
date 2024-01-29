@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
@@ -7,6 +7,10 @@ import LeftBar from "@/components/LeftBar/LeftBar";
 import RightBar from "@/components/RightBar/RightBar";
 import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
+import { NextUIProvider } from "@nextui-org/react";
+import AuthModal from "@/components/Modal/AuthModal";
+import SubscribeModal from "@/components/Modal/SubscribeModal";
+import UploadModal from "@/components/Modal/UploadModal";
 
 interface RubicFontOptions {
   [key: string]: string | string[];
@@ -28,20 +32,35 @@ export const metadata: Metadata = {
 };
 
 const RootLayout: FC<RootLayoutProps> = ({ children }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <html lang="en">
       <SupabaseProvider>
         <UserProvider>
-          <body
-            className={`flex flex-row items-stretch justify-center w-screen h-screen text-primary-text ${rubik.className} overflow-hidden`}
-          >
-            <LeftBar />
-            <div className="flex flex-col h-screen w-full p-4 bg-main-bg ">
-              <TopBar />
-              {children}
-            </div>
-            <RightBar />
-          </body>
+          <NextUIProvider>
+            {isMounted ? (
+              <>
+                <AuthModal />
+                <SubscribeModal products={[]} />
+                <UploadModal />
+              </>
+            ) : null}
+            <body
+              className={`flex flex-row items-stretch justify-center w-screen h-screen text-primary-text ${rubik.className} overflow-hidden`}
+            >
+              <LeftBar />
+              <div className="flex flex-col h-screen w-full p-4 bg-main-bg ">
+                <TopBar />
+                {children}
+              </div>
+              <RightBar />
+            </body>
+          </NextUIProvider>
         </UserProvider>
       </SupabaseProvider>
     </html>
