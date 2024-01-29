@@ -29,8 +29,8 @@ const AuthModal = () => {
 
   return (
     <ParentModal
-      title="Welcome back"
-      description="Login to your account."
+      title="Welcome To Wemsc Auth"
+      description=""
       isOpen={isOpen}
       onChange={onChange}
     >

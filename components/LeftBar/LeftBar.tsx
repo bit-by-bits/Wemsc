@@ -4,19 +4,23 @@ import urls from "@/URL";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { FC, useMemo, useState } from "react";
-import { GoHome, GoHomeFill } from "react-icons/go";
-import { IoHeart, IoHeartOutline } from "react-icons/io5";
-import { MdLibraryMusic, MdOutlineLibraryMusic } from "react-icons/md";
-import { PiCompass, PiCompassFill } from "react-icons/pi";
+import { FC, useMemo, useState } from "react";
 import {
+  RiCompassDiscoverFill,
+  RiCompassDiscoverLine,
   RiDownloadCloudFill,
   RiDownloadCloudLine,
+  RiFolderSharedFill,
+  RiFolderSharedLine,
+  RiHeart3Fill,
+  RiHeart3Line,
+  RiHome2Fill,
+  RiHome2Line,
   RiMenuFoldLine,
   RiMenuUnfoldLine,
 } from "react-icons/ri";
-import { TbFolderFilled, TbFolderMinus } from "react-icons/tb";
 import LeftBarMenu from "./LeftBarMenu";
+import { LuListMusic } from "react-icons/lu";
 
 const LeftBar: FC = () => {
   const path = usePathname();
@@ -26,22 +30,22 @@ const LeftBar: FC = () => {
     () => [
       {
         label: "Home",
-        iconOutline: GoHome,
-        iconFilled: GoHomeFill,
+        iconOutline: RiHome2Line,
+        iconFilled: RiHome2Fill,
         href: urls.HOME,
         active: path === urls.HOME,
       },
       {
         label: "Discover",
-        iconOutline: PiCompass,
-        iconFilled: PiCompassFill,
+        iconOutline: RiCompassDiscoverLine,
+        iconFilled: RiCompassDiscoverFill,
         href: urls.DISCOVER,
         active: path === urls.DISCOVER,
       },
       {
         label: "Collections",
-        iconOutline: MdOutlineLibraryMusic,
-        iconFilled: MdLibraryMusic,
+        iconOutline: LuListMusic,
+        iconFilled: LuListMusic,
         href: urls.COLLECTIONS,
         active: path === urls.COLLECTIONS,
       },
@@ -60,15 +64,15 @@ const LeftBar: FC = () => {
       },
       {
         label: "Favourites",
-        iconOutline: IoHeartOutline,
-        iconFilled: IoHeart,
+        iconOutline: RiHeart3Line,
+        iconFilled: RiHeart3Fill,
         href: urls.FAVOURITES,
         active: path === urls.FAVOURITES,
       },
       {
         label: "Local Files",
-        iconOutline: TbFolderMinus,
-        iconFilled: TbFolderFilled,
+        iconOutline: RiFolderSharedLine,
+        iconFilled: RiFolderSharedFill,
         href: urls.LOCAL_FILES,
         active: path === urls.LOCAL_FILES,
       },

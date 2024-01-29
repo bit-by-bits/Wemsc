@@ -1,18 +1,17 @@
 type urlsType = { [key: string]: string };
 
 const urls = {
-  HOME: "/",
-  DISCOVER: "/discover",
   COLLECTIONS: "/collections",
+  DISCOVER: "/discover",
   DOWNLOADS: "/downloads",
   FAVOURITES: "/favourites",
+  HOME: "/",
   LOCAL_FILES: "/local-files",
-  RECENTLY_PLAYED: "/recently-played",
   MY_PLAYLISTS: "/my-playlists",
-  SETTINGS: "/settings",
-  PROFILE: "/profile",
-  LOGOUT: "/logout",
   NOTIFICATIONS: "/notifications",
+  PROFILE: "/profile",
+  RECENTLY_PLAYED: "/recently-played",
+  SETTINGS: "/settings",
 } as urlsType;
 
 export default urls;

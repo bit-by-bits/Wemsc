@@ -9,43 +9,23 @@ import { Avatar } from "@nextui-org/react";
 import { LuBell, LuBellOff } from "react-icons/lu";
 import toast from "react-hot-toast";
 import RightBarTopMenu from "./RightBarTopMenu";
+import useAuth from "../Modal/ModalUtils/useAuth";
 
 const RightBar: FC = () => {
-  const { user } = useUser();
-  const [dnd, setDnd] = useState<boolean>(false);
-
-  const userName = useMemo<string>(() => {
-    return (
-      user?.user_metadata?.full_name ||
-      user?.user_metadata?.name ||
-      user?.email ||
-      user?.phone ||
-      "Welcome!"
-    );
-  }, [user]);
-
-  const userPhoto = useMemo<string>(() => {
-    return (
-      user?.user_metadata?.avatar_url || user?.user_metadata?.picture || ""
-    );
-  }, [user]);
+  const { onOpen } = useAuth();
+  const { user, userName, userPhoto } = useUser();
+  const [DND, setDND] = useState<boolean>(false);
 
   const recently_played = useMemo<RightBarItem[]>(
     () => [
       {
-        img: "https://i.scdn.co/image/ab67616d0000b273e3b9b8b9b7b6b6b6b6b6b6b6",
+        img: "https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg",
         main: "Hold Me Up",
         left: "Conor Maynard",
         right: "2 days ago",
       },
       {
-        img: "https://i.scdn.co/image/ab67616d0000b273e3b9b8b9b7b6b6b6b6b6b6b6",
-        main: "Hold Me Up",
-        left: "Conor Maynard",
-        right: "2 days ago",
-      },
-      {
-        img: "https://i.scdn.co/image/ab67616d0000b273e3b9b8b9b7b6b6b6b6b6b6b6",
+        img: "https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg",
         main: "Hold Me Up",
         left: "Conor Maynard",
         right: "2 days ago",
@@ -57,19 +37,13 @@ const RightBar: FC = () => {
   const my_playlists = useMemo<RightBarItem[]>(
     () => [
       {
-        img: "https://i.scdn.co/image/ab67616d0000b273e3b9b8b9b7b6b6b6b6b6b6b6",
+        img: "https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg",
         main: "Hold Me Up",
         left: "Conor Maynard",
         right: "2 days ago",
       },
       {
-        img: "https://i.scdn.co/image/ab67616d0000b273e3b9b8b9b7b6b6b6b6b6b6b6",
-        main: "Hold Me Up",
-        left: "Conor Maynard",
-        right: "2 days ago",
-      },
-      {
-        img: "https://i.scdn.co/image/ab67616d0000b273e3b9b8b9b7b6b6b6b6b6b6b6",
+        img: "https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg",
         main: "Hold Me Up",
         left: "Conor Maynard",
         right: "2 days ago",
@@ -95,19 +69,17 @@ const RightBar: FC = () => {
   );
 
   const handleOn = () => {
-    setDnd(false);
+    setDND(false);
     toast.success("Notifications turned on");
   };
 
   const handleOff = () => {
-    setDnd(true);
+    setDND(true);
     toast.success("Notifications turned off");
   };
 
   return (
-    <div
-      className={`flex flex-col items-center h-screen p-4 bg-menu-bg transition-all duration-300 min-w-[25vw]`}
-    >
+    <div className="flex flex-col items-center h-screen p-4 bg-menu-bg transition-all duration-300 min-w-[25vw]">
       <div className="flex items-center justify-between w-full mb-4">
         <div className="flex flex-row items-center gap-2">
           <Avatar
@@ -117,15 +89,29 @@ const RightBar: FC = () => {
             className="hover:cursor-pointer"
           />
           <div className="flex flex-col ml-2">
-            <span className="text-sm font-bold text-white">{userName}</span>
-            <Link href={urls.PROFILE} className="text-xs">
-              See your profile
-            </Link>
+            <span className="text-sm font-bold text-white">
+              {userName !== "" ? userName : "Welcome!"}
+            </span>
+            {user ? (
+              <Link
+                href={urls.PROFILE}
+                className="text-xs hover:text-white hover:underline cursor-pointer"
+              >
+                See your profile
+              </Link>
+            ) : (
+              <div
+                onClick={onOpen}
+                className="text-xs hover:text-white hover:underline cursor-pointer"
+              >
+                Click here to login
+              </div>
+            )}
           </div>
         </div>
 
         <div className="flex flex-row items-center justify-center gap-2 p-1 h-10 hover:cursor-pointer">
-          {dnd ? (
+          {DND ? (
             <LuBellOff
               className="hover:text-white text-2xl"
               onClick={handleOn}

@@ -73,11 +73,13 @@ export interface UserDetails {
 }
 
 export interface UserContextType {
-  token: string | null;
-  user: User | null;
   details: UserDetails | null;
   loading: boolean;
   sub: Subscription | null;
+  token: string | null;
+  user: User | null;
+  userName: string;
+  userPhoto: string;
 }
 
 export interface UserProviderProps {

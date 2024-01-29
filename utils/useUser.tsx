@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useState, createContext, useContext, FC } from "react";
+import {
+  useEffect,
+  useState,
+  createContext,
+  useContext,
+  FC,
+  useMemo,
+} from "react";
 import {
   useUser as useSupaUser,
   useSessionContext,
@@ -63,12 +70,33 @@ export const UserContextProvider: FC<UserProviderProps> = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [supaUser, isLoading]);
 
+  const name = useMemo<string>(() => {
+    return (
+      supaUser?.user_metadata?.full_name ||
+      supaUser?.user_metadata?.name ||
+      supaUser?.email ||
+      supaUser?.phone ||
+      ""
+    );
+  }, [supaUser]);
+
+  const photo = useMemo<string>(() => {
+    return (
+      supaUser?.user_metadata?.avatar_url ||
+      supaUser?.user_metadata?.picture ||
+      ""
+    );
+  }, [supaUser]);
+
   const value = {
-    token: session?.access_token ?? null,
-    user: supaUser,
     details: userDetails,
     loading: isLoading || dataLoading,
     sub: subscription,
+    token: session?.access_token ?? null,
+    user: supaUser,
+
+    userName: name,
+    userPhoto: photo,
   };
 
   return <UserContext.Provider value={value} {...props} />;
