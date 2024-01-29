@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode } from "react";
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
@@ -7,12 +7,9 @@ import LeftBar from "@/components/LeftBar/LeftBar";
 import RightBar from "@/components/RightBar/RightBar";
 import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
-import { NextUIProvider } from "@nextui-org/react";
-import AuthModal from "@/components/Modal/AuthModal";
-import SubscribeModal from "@/components/Modal/SubscribeModal";
-import UploadModal from "@/components/Modal/UploadModal";
+import UIElements from "@/components/UIElements";
 
-interface RubicFontOptions {
+interface RubikFontOptions {
   [key: string]: string | string[];
 }
 
@@ -24,45 +21,31 @@ const rubik = Rubik({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   style: ["normal", "italic"],
   subsets: ["latin"],
-} as RubicFontOptions);
+} as RubikFontOptions);
 
 export const metadata: Metadata = {
   title: "Wemsc | Music App For All Your Needs",
-  description: "Wemsc is a music app for all your needs!",
+  description: "Wemsc is the music platform for all your needs.",
 };
 
 const RootLayout: FC<RootLayoutProps> = ({ children }) => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   return (
     <html lang="en">
-      <SupabaseProvider>
-        <UserProvider>
-          <NextUIProvider>
-            {isMounted ? (
-              <>
-                <AuthModal />
-                <SubscribeModal products={[]} />
-                <UploadModal />
-              </>
-            ) : null}
-            <body
-              className={`flex flex-row items-stretch justify-center w-screen h-screen text-primary-text ${rubik.className} overflow-hidden`}
-            >
-              <LeftBar />
-              <div className="flex flex-col h-screen w-full p-4 bg-main-bg ">
-                <TopBar />
-                {children}
-              </div>
-              <RightBar />
-            </body>
-          </NextUIProvider>
-        </UserProvider>
-      </SupabaseProvider>
+      <body
+        className={`flex flex-row items-stretch justify-center w-screen h-screen text-primary-text ${rubik.className} overflow-hidden`}
+      >
+        <SupabaseProvider>
+          <UserProvider>
+            <UIElements pwp={[]} />
+            <LeftBar />
+            <div className="flex flex-col h-screen w-full p-4 bg-main-bg">
+              <TopBar />
+              {children}
+            </div>
+            <RightBar />
+          </UserProvider>
+        </SupabaseProvider>
+      </body>
     </html>
   );
 };

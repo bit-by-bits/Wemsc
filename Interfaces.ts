@@ -77,7 +77,7 @@ export interface UserContextType {
   user: User | null;
   details: UserDetails | null;
   loading: boolean;
-  plan: Subscription | null;
+  sub: Subscription | null;
 }
 
 export interface UserProviderProps {

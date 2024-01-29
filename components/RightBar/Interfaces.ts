@@ -1,23 +1,22 @@
-interface LeftBarItem {
+interface RightBarItem {
+  img: string;
+  main: string;
+  left: string;
+  right: string;
+}
+
+interface RightBarMenu {
   label: string;
-  iconOutline: any;
-  iconFilled: any;
   href: string;
-  active: boolean;
+  items: RightBarItem[];
 }
 
-interface LeftBarMenu {
+interface RightBarItemProps {
+  item: RightBarItem;
+}
+
+interface RightBarMenuProps {
   label: string;
-  items: LeftBarItem[];
-}
-
-interface LeftBarItemProps {
-  item: LeftBarItem;
-  isOpen: boolean;
-}
-
-interface LeftBarMenuProps {
-  label: string;
-  items: LeftBarItem[];
-  isOpen: boolean;
+  href: string;
+  items: RightBarItem[];
 }

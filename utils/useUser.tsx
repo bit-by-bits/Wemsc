@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState, createContext, useContext, FC } from "react";
 import {
   useUser as useSupaUser,
@@ -66,7 +68,7 @@ export const UserContextProvider: FC<UserProviderProps> = props => {
     user: supaUser,
     details: userDetails,
     loading: isLoading || dataLoading,
-    plan: subscription,
+    sub: subscription,
   };
 
   return <UserContext.Provider value={value} {...props} />;

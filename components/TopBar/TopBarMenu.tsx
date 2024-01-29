@@ -2,10 +2,13 @@ import urls from "@/URL";
 import Link from "next/link";
 import React, { FC, useState, useEffect, useRef } from "react";
 import { TopBarMenuItems } from "./Interfaces";
+import useAuth from "../Modal/ModalUtils/useAuth";
 
 const TopBarMenu: FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { onOpen } = useAuth();
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -27,15 +30,15 @@ const TopBarMenu: FC = () => {
   const items: TopBarMenuItems[] = [
     {
       label: "Home",
-      href: urls.home,
+      func: () => (window.location.href = urls.HOME),
     },
     {
-      label: "About",
-      href: urls.about,
+      label: "Login",
+      func: onOpen,
     },
     {
-      label: "Contact",
-      href: urls.contact,
+      label: "Signup",
+      func: onOpen,
     },
   ];
 
@@ -52,13 +55,13 @@ const TopBarMenu: FC = () => {
       {isMenuOpen && (
         <div className="bg-black text-white  absolute top-11 right-0 flex flex-col rounded p-1">
           {items.map((e, i) => (
-            <Link
+            <div
               key={i}
-              href={e.href}
+              onClick={e.func}
               className="p-2 min-w-[100px] hover:underline"
             >
               {e.label}
-            </Link>
+            </div>
           ))}
         </div>
       )}

@@ -6,7 +6,7 @@ const LeftBarItem: FC<LeftBarItemProps> = ({ item, isOpen }) => {
     <Link
       key={item.label}
       href={item.href}
-      className={`flex flex-row items-center justify-start w-full py-1 my-1 gap-2 rounded-lg ${
+      className={`flex flex-row items-center justify-start w-full py-1 gap-2 rounded-lg ${
         item.active ? "text-link-active" : "hover:text-white"
       }`}
     >
@@ -15,7 +15,7 @@ const LeftBarItem: FC<LeftBarItemProps> = ({ item, isOpen }) => {
       ) : (
         <item.iconOutline className={isOpen ? "" : "text-2xl w-full"} />
       )}
-      {isOpen && <span className="text-sm">{item.label}</span>}
+      {isOpen && <span >{item.label}</span>}
     </Link>
   );
 };

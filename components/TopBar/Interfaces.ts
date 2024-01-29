@@ -16,5 +16,5 @@ export interface TopBarSearchProps {
 
 export interface TopBarMenuItems {
   label: string;
-  href: string;
+  func: () => void;
 }

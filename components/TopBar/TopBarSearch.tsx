@@ -12,7 +12,7 @@ const TopBarSearch: FC<TopBarSearchProps> = ({
   handleFocus,
 }) => {
   return (
-    <div className="relative flex-grow mx-4">
+    <div className="relative flex w-full mx-4">
       <div className="flex items-center absolute inset-y-0 left-0 pl-3 pointer-events-none">
         {isFocused ? (
           <LuMusic className="text-secondary-text text-xl" />
