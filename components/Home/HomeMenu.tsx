@@ -1,6 +1,7 @@
 import { FC } from "react";
 import HomeCard from "./HomeCard";
 import Link from "next/link";
+import { HomeMenuProps } from "./Interfaces";
 
 const HomeMenu: FC<HomeMenuProps> = ({ label, href, items }) => (
   <div
@@ -13,7 +14,7 @@ const HomeMenu: FC<HomeMenuProps> = ({ label, href, items }) => (
         See All
       </Link>
     </div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 gap-x-6">
       {items.map((e, i) => (
         <HomeCard key={i} item={e} />
       ))}

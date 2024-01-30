@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { InputHTMLAttributes, ReactNode } from "react";
 
 export interface ParentModalProps {
   isOpen: boolean;
@@ -7,3 +7,13 @@ export interface ParentModalProps {
   description: string;
   children: ReactNode;
 }
+
+export interface UploadModalFileInputProps {
+  id: string;
+  disabled: boolean;
+  register: any;
+  placeholder: string;
+  accept: string;
+}
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}

@@ -1,22 +1,22 @@
-interface HomeCard {
-  image: string;
-  title: string;
-  description: string;
+import { Song } from "@/Interfaces";
+
+export interface HomeCard {
+  item: Song;
   href: string;
 }
 
-interface HomeMenu {
+export interface HomeMenu {
   label: string;
   href: string;
-  items: HomeCard[];
+  items: Song[];
 }
 
-interface HomeCardProps {
-  item: HomeCard;
+export interface HomeCardProps {
+  item: Song;
 }
 
-interface HomeMenuProps {
+export interface HomeMenuProps {
   label: string;
   href: string;
-  items: HomeCard[];
+  items: Song[];
 }

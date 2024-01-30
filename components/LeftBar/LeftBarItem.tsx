@@ -15,7 +15,7 @@ const LeftBarItem: FC<LeftBarItemProps> = ({ item, isOpen }) => {
       ) : (
         <item.iconOutline className={isOpen ? "text-xl" : "text-xl w-full"} />
       )}
-      {isOpen && <span >{item.label}</span>}
+      {isOpen && <span>{item.label}</span>}
     </Link>
   );
 };

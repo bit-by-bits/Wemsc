@@ -5,6 +5,7 @@ import { ProductWithPrice } from "@/Interfaces";
 import AuthModal from "./Modal/AuthModal";
 import SubModal from "./Modal/SubModal";
 import { Toaster } from "react-hot-toast";
+import UploadModal from "./Modal/UploadModal";
 
 interface UIElementsProps {
   pwp: ProductWithPrice[];
@@ -24,6 +25,7 @@ const UIElements: FC<UIElementsProps> = ({ pwp }) => {
       />
       <AuthModal />
       <SubModal products={pwp} />
+      <UploadModal />
     </>
   ) : null;
 };

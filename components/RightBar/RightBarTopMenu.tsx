@@ -1,11 +1,8 @@
-import urls from "@/URL";
-import Link from "next/link";
 import React, { FC, useState, useEffect, useRef } from "react";
 import useAuth from "../Modal/ModalUtils/useAuth";
 import { FaAngleDown } from "react-icons/fa6";
 
 const RightBarTopMenu: FC = () => {
-  const { onOpen } = useAuth();
   const menuRef = useRef<HTMLDivElement>(null);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);

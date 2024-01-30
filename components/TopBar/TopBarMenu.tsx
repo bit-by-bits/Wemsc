@@ -1,15 +1,24 @@
 import urls from "@/URL";
 import React, { FC, useState, useEffect, useRef, useMemo } from "react";
 import { TopBarMenuItems } from "./Interfaces";
-import useAuth from "../Modal/ModalUtils/useAuth";
 import { useUser } from "@/utils/useUser";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import useAuth from "../Modal/ModalUtils/useAuth";
+import useUpload from "../Modal/ModalUtils/useUpload";
+import {
+  RiLoginCircleLine,
+  RiLogoutCircleLine,
+  RiSettings3Line,
+  RiUploadCloudLine,
+  RiUser3Line,
+} from "react-icons/ri";
 
 const TopBarMenu: FC = () => {
   const { user } = useUser();
-  const { onOpen } = useAuth();
+  const { onOpen: onOpenAuth } = useAuth();
+  const { onOpen: onOpenUpload } = useUpload();
 
   const router = useRouter();
   const client = useSupabaseClient();
@@ -35,7 +44,7 @@ const TopBarMenu: FC = () => {
       toast.error("Logout Failed");
     } else toast.success("Logout Successful");
 
-    router.push(urls.HOME);
+    router.refresh();
   };
 
   useEffect(() => {
@@ -49,10 +58,12 @@ const TopBarMenu: FC = () => {
     () => {
       const links = [
         {
-          label: "Home",
-          func: () => (window.location.href = urls.HOME),
+          icon: RiUploadCloudLine,
+          label: "Upload",
+          func: onOpenUpload,
         },
         {
+          icon: RiSettings3Line,
           label: "Settings",
           func: () => (window.location.href = urls.SETTINGS),
         },
@@ -60,17 +71,20 @@ const TopBarMenu: FC = () => {
 
       const login = [
         {
+          icon: RiLoginCircleLine,
           label: "Login",
-          func: onOpen,
+          func: onOpenAuth,
         },
         {
+          icon: RiUser3Line,
           label: "Register",
-          func: onOpen,
+          func: onOpenAuth,
         },
       ];
 
       const logout = [
         {
+          icon: RiLogoutCircleLine,
           label: "Logout",
           func: handleLogout,
         },
@@ -93,14 +107,15 @@ const TopBarMenu: FC = () => {
         ))}
       </div>
       {isMenuOpen && (
-        <div className="bg-black text-white  absolute top-11 right-0 flex flex-col rounded p-1">
+        <div className="bg-black text-white  absolute top-11 right-0 flex flex-col rounded p-1 z-50">
           {items.map((e, i) => (
             <div
               key={i}
               onClick={e.func}
-              className="p-2 min-w-[100px] hover:underline cursor-pointer"
+              className="p-2 min-w-[150px] hover:underline cursor-pointer flex flex-row items-center gap-2"
             >
-              {e.label}
+              <e.icon />
+              <span>{e.label}</span>
             </div>
           ))}
         </div>

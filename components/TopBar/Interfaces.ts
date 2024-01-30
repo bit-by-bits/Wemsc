@@ -1,4 +1,5 @@
 import { ChangeEvent, ReactElement } from "react";
+import { IconType } from "react-icons";
 
 export interface TopBarButtons {
   icon: ReactElement;
@@ -15,6 +16,7 @@ export interface TopBarSearchProps {
 }
 
 export interface TopBarMenuItems {
+  icon: IconType;
   label: string;
   func: () => void;
 }

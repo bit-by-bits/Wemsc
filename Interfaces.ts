@@ -36,11 +36,12 @@ export interface ProductWithPrice extends Product {
 
 export interface Song {
   id: string;
-  user_id: string;
+  uploaded: string;
+  label: string;
+  href: string;
+  img: string;
   author: string;
-  title: string;
-  song_path: string;
-  image_path: string;
+  user_id: string;
 }
 
 export interface Subscription {

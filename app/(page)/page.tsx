@@ -1,82 +1,38 @@
-"use client";
-
-import React, { useMemo } from "react";
+import React from "react";
 import { NextPage } from "next";
 import urls from "@/URL";
 import HomeMenu from "@/components/Home/HomeMenu";
-import { useUser } from "@/utils/useUser";
+import { fetchUploads } from "@/utils/useSongs";
 
-const Home: NextPage = () => {
-  const { userName } = useUser();
+const Home: NextPage = async () => {
+  const uploads = await fetchUploads();
 
   const getGreeting = () => {
-    const currentHour = new Date().getHours();
-    if (currentHour >= 4 && currentHour < 12) {
+    const hours = new Date().getHours();
+    if (hours >= 4 && hours < 12) {
       return "Good Morning!";
-    } else if (currentHour >= 12 && currentHour < 17) {
+    } else if (hours >= 12 && hours < 17) {
       return "Good Afternoon!";
-    } else if (currentHour >= 17 && currentHour < 20) {
+    } else if (hours >= 17 && hours < 20) {
       return "Good Evening!";
     } else {
       return "Good Night!";
     }
   };
 
-  const items1 = useMemo<HomeCard[]>(
-    () => [
-      {
-        image:
-          "https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg",
-        title: "Hold Me Up",
-        description: "Conor Maynard",
-        href: urls.HOME,
-      },
-      {
-        image:
-          "https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg",
-        title: "Hold Me Up",
-        description: "Conor Maynard",
-        href: urls.HOME,
-      },
-      {
-        image:
-          "https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg",
-        title: "Hold Me Up",
-        description: "Conor Maynard",
-        href: urls.HOME,
-      },
-      {
-        image:
-          "https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg",
-        title: "Hold Me Up",
-        description: "Conor Maynard",
-        href: urls.HOME,
-      },
-      {
-        image:
-          "https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg",
-        title: "Hold Me Up",
-        description: "Conor Maynard",
-        href: urls.HOME,
-      },
-    ],
-    [],
-  );
-
   return (
     <div className="flex flex-col w-full h-full overflow-y-scroll overflow-x-hidden scrollbar-hide">
       <div className="w-full mb-2">
         <div className="flex flex-col items-center justify-center w-full h-[40vh] bg-black bg-opacity-50 rounded-lg">
           <span className="text-5xl font-bold text-white">{getGreeting()}</span>
-          <span className="text-3xl font-semibold text-white">{userName}</span>
+          <span className="text-3xl font-semibold text-white"></span>
         </div>
       </div>
       <HomeMenu
-        label="Recently Played"
+        label="Uploaded Songs"
         href={urls.RECENTLY_PLAYED}
-        items={items1}
+        items={uploads}
       />
-      <HomeMenu label="My Playlists" href={urls.MY_PLAYLISTS} items={items1} />
     </div>
   );
 };

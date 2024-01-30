@@ -11,7 +11,7 @@ const ParentModal: FC<ParentModalProps> = ({
 }) => {
   return (
     <Modal isOpen={isOpen} onOpenChange={onChange}>
-      <ModalContent className="border border-neutral-700 rounded-md bg-neutral-800 focus:outline-none scale-80">
+      <ModalContent className="border border-neutral-700 rounded-md bg-main-bg focus:outline-none scale-80">
         {title !== "" && (
           <ModalHeader>
             <div className="text-xl text-center font-bold">{title}</div>
