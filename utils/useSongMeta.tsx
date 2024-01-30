@@ -1,3 +1,5 @@
+"use client";
+
 import { Song } from "@/Interfaces";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
@@ -10,4 +12,13 @@ const useImageLoader: (song: Song) => string | null = (song: Song) => {
   return imageData.publicUrl;
 };
 
-export default useImageLoader;
+const useSongLoader = (song: Song) => {
+  const { storage } = useSupabaseClient();
+  if (!song) return "";
+
+  const { data: songData } = storage.from("songs").getPublicUrl(song.href);
+
+  return songData.publicUrl;
+};
+
+export { useImageLoader, useSongLoader };

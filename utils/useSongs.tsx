@@ -14,7 +14,7 @@ const fetchUploads = async (): Promise<Song[]> => {
   return (data as any) || [];
 };
 
-const fetchUserUploads = async (): Promise<Song[]> => {
+const fetchUploadsByUser = async (): Promise<Song[]> => {
   const supabase = createServerComponentClient({ cookies: cookies });
 
   const { data: sessionData, error: sessionError } =
@@ -76,4 +76,25 @@ const fetchFavourites = async (): Promise<Song[]> => {
   else return data.map(item => ({ ...item.songs }));
 };
 
-export { fetchUploads, fetchUserUploads, searchUploads, fetchFavourites };
+const fetchUploadsByID = async (id: string): Promise<Song> => {
+  const supabase = createServerComponentClient({ cookies: cookies });
+
+  if (id === "") return {} as Song;
+
+  const { data, error } = await supabase
+    .from("songs")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) console.log(error.message);
+  return (data as any) || [];
+};
+
+export {
+  fetchUploads,
+  fetchUploadsByUser,
+  searchUploads,
+  fetchFavourites,
+  fetchUploadsByID,
+};

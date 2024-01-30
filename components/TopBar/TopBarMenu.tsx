@@ -1,3 +1,5 @@
+"use client"
+
 import urls from "@/URL";
 import React, { FC, useState, useEffect, useRef, useMemo } from "react";
 import { TopBarMenuItems } from "./Interfaces";

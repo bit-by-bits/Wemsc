@@ -3,17 +3,17 @@
 import { FC, useState } from "react";
 import { Image } from "@nextui-org/react";
 import { HomeCardProps } from "./Interfaces";
-import useImageLoader from "@/utils/useImage";
+import { useImageLoader } from "@/utils/useSongMeta";
 import LikeButton from "../Button/LikeButton";
+import PlayButton from "../Button/PlayButton";
 
-const HomeCard: FC<HomeCardProps> = ({ item }) => {
-  const image = useImageLoader(item) || "/placeholder.png";
-
+const HomeCard: FC<HomeCardProps> = ({ item, onPlay }) => {
   const [show, setShow] = useState(false);
+  const image = useImageLoader(item) || "/placeholder.png";
 
   return (
     <div
-      className="relative group flex flex-col w-full h-full hover:bg-gray-900 p-2 rounded cursor-pointer"
+      className="relative group flex flex-col w-full h-full hover:bg-gray-900 p-2 rounded"
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
     >
@@ -29,7 +29,10 @@ const HomeCard: FC<HomeCardProps> = ({ item }) => {
           <span className="ml-2 text-white mt-2">{item.label}</span>
           <span className="ml-2 text-xs">{item.author}</span>
         </div>
-        <LikeButton songID={item.id} show={show} />
+        <div className="flex flex-row items-center gap-2">
+          <LikeButton songID={item.id} show={show} />
+          <PlayButton onPlay={() => onPlay(item.id)} show={show} />
+        </div>
       </div>
     </div>
   );

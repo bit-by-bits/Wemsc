@@ -13,6 +13,7 @@ export interface HomeMenu {
 
 export interface HomeCardProps {
   item: Song;
+  onPlay: (id: string) => void;
 }
 
 export interface HomeMenuProps {

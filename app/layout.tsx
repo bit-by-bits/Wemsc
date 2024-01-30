@@ -8,7 +8,8 @@ import RightBar from "@/components/RightBar/RightBar";
 import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
 import UIElements from "@/components/UIElements";
-import { fetchUserUploads } from "@/utils/useSongs";
+import { fetchUploadsByUser } from "@/utils/useSongs";
+import PlayerWrapper from "@/components/Player/PlayerWrapper";
 
 interface RubikFontOptions {
   [key: string]: string | string[];
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
 };
 
 const RootLayout: FC<RootLayoutProps> = async ({ children }) => {
-  const uploads = await fetchUserUploads();
+  const uploads = await fetchUploadsByUser();
 
   return (
     <html lang="en">
@@ -39,6 +40,7 @@ const RootLayout: FC<RootLayoutProps> = async ({ children }) => {
       >
         <SupabaseProvider>
           <UserProvider>
+            <PlayerWrapper />
             <UIElements pwp={[]} />
             <LeftBar />
             <div className="flex flex-col h-screen w-full px-4 bg-main-bg">
