@@ -1,22 +1,15 @@
-interface RightBarItem {
-  img: string;
-  main: string;
-  left: string;
-  right: string;
+import { Song } from "@/Interfaces";
+
+export interface RightBarProps {
+  up: Song[];
 }
 
-interface RightBarMenu {
+export interface RightBarItemProps {
+  item: Song;
+}
+
+export interface RightBarMenuProps {
   label: string;
   href: string;
-  items: RightBarItem[];
-}
-
-interface RightBarItemProps {
-  item: RightBarItem;
-}
-
-interface RightBarMenuProps {
-  label: string;
-  href: string;
-  items: RightBarItem[];
+  items: Song[];
 }

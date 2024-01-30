@@ -8,6 +8,7 @@ import RightBar from "@/components/RightBar/RightBar";
 import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
 import UIElements from "@/components/UIElements";
+import { fetchUserUploads } from "@/utils/useSongs";
 
 interface RubikFontOptions {
   [key: string]: string | string[];
@@ -28,7 +29,9 @@ export const metadata: Metadata = {
   description: "Wemsc is the music platform for all your needs.",
 };
 
-const RootLayout: FC<RootLayoutProps> = ({ children }) => {
+const RootLayout: FC<RootLayoutProps> = async ({ children }) => {
+  const uploads = await fetchUserUploads();
+
   return (
     <html lang="en">
       <body
@@ -38,11 +41,13 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
           <UserProvider>
             <UIElements pwp={[]} />
             <LeftBar />
-            <div className="flex flex-col h-screen w-full p-4 bg-main-bg">
+            <div className="flex flex-col h-screen w-full px-4 bg-main-bg">
               <TopBar />
-              {children}
+              <div className="w-full h-full overflow-y-scroll overflow-x-hidden scrollbar-hide">
+                {children}
+              </div>
             </div>
-            <RightBar />
+            <RightBar up={uploads} />
           </UserProvider>
         </SupabaseProvider>
       </body>

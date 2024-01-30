@@ -1,6 +1,7 @@
 import { FC } from "react";
 import LeftBarItem from "./RightBarItem";
 import Link from "next/link";
+import { RightBarMenuProps } from "./Interfaces";
 
 const RightBarMenu: FC<RightBarMenuProps> = ({ label, href, items }) => (
   <div
@@ -13,7 +14,7 @@ const RightBarMenu: FC<RightBarMenuProps> = ({ label, href, items }) => (
         See All
       </Link>
     </div>
-    {items.map((e, i) => (
+    {items?.map((e, i) => (
       <LeftBarItem key={i} item={e} />
     ))}
   </div>

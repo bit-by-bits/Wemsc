@@ -34,10 +34,10 @@ const RightBarTopMenu: FC = () => {
       />
       {isMenuOpen && (
         <div className="bg-black text-white absolute top-10 right-0 flex flex-col rounded p-1 max-h-[200px] overflow-y-auto scrollbar-hide max-w-[200px] min-w-[150px]">
-          {items.length === 0 ? (
+          {items?.length === 0 ? (
             <div className="p-2 text-center">No items</div>
           ) : (
-            items.map((e, i) => (
+            items?.map((e, i) => (
               <div
                 key={i}
                 className="p-2 border-b border-primary-text overflow-hidden whitespace-nowrap overflow-ellipsis hover:overflow-auto hover:whitespace-normal scrollbar-hide"

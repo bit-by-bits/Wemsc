@@ -9,7 +9,7 @@ const LeftBarMenu: FC<LeftBarMenuProps> = ({ label, items, isOpen }) => (
     {isOpen && (
       <span className="text-xs mb-2 text-secondary-text">{label}</span>
     )}
-    {items.map((e, i) => (
+    {items?.map((e, i) => (
       <LeftBarItem key={i} item={e} isOpen={isOpen} />
     ))}
   </div>

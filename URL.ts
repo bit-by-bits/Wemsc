@@ -11,6 +11,7 @@ const urls = {
   NOTIFICATIONS: "/notifications",
   PROFILE: "/profile",
   RECENTLY_PLAYED: "/recently-played",
+  SEARCH: "/search",
   SETTINGS: "/settings",
 } as urlsType;
 

@@ -1,7 +1,10 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { LuMusic, LuSearch } from "react-icons/lu";
 import { MdClear } from "react-icons/md";
 import { TopBarSearchProps } from "./Interfaces";
+import { usePathname, useRouter } from "next/navigation";
+import useDebounce from "@/utils/useDebounce";
+import urls from "@/URL";
 
 const TopBarSearch: FC<TopBarSearchProps> = ({
   text,
@@ -11,6 +14,18 @@ const TopBarSearch: FC<TopBarSearchProps> = ({
   handleBlur,
   handleFocus,
 }) => {
+  const path = usePathname();
+  const router = useRouter();
+  const debounce = useDebounce<string>(text, 500);
+
+  useEffect(() => {
+    const URL = `${urls.SEARCH}?title=${debounce}`;
+    if (debounce.replace(/\s/g, "").length > 0 && path !== URL)
+      router.push(URL);
+    else if (path === urls.SEARCH) router.push(urls.HOME);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debounce]);
+
   return (
     <div className="relative flex w-full mx-4">
       <div className="flex items-center absolute inset-y-0 left-0 pl-3 pointer-events-none">

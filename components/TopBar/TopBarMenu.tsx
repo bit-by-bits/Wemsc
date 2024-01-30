@@ -108,7 +108,7 @@ const TopBarMenu: FC = () => {
       </div>
       {isMenuOpen && (
         <div className="bg-black text-white  absolute top-11 right-0 flex flex-col rounded p-1 z-50">
-          {items.map((e, i) => (
+          {items?.map((e, i) => (
             <div
               key={i}
               onClick={e.func}

@@ -6,8 +6,8 @@ import TopBarSearch from "./TopBarSearch";
 import TopBarMenu from "./TopBarMenu";
 
 const TopBar: FC = () => {
-  const [isFocused, setIsFocused] = useState(false);
   const [text, setText] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
 
   const clearText = () => {
     setText("");
@@ -26,7 +26,7 @@ const TopBar: FC = () => {
   };
 
   return (
-    <div className="flex flex-row items-center justify-between w-full h-16 mb-4">
+    <div className="flex flex-row items-center justify-between w-full h-16 my-4">
       <TopBarButtons />
       <TopBarSearch
         text={text}

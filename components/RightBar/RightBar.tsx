@@ -10,62 +10,28 @@ import { LuBell, LuBellOff } from "react-icons/lu";
 import toast from "react-hot-toast";
 import RightBarTopMenu from "./RightBarTopMenu";
 import useAuth from "../Modal/ModalUtils/useAuth";
+import { RightBarMenuProps, RightBarProps } from "./Interfaces";
 
-const RightBar: FC = () => {
+const RightBar: FC<RightBarProps> = ({ up }) => {
   const { onOpen } = useAuth();
   const { user, userName, userPhoto } = useUser();
+
   const [DND, setDND] = useState<boolean>(false);
 
-  const recently_played = useMemo<RightBarItem[]>(
-    () => [
-      {
-        img: "https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg",
-        main: "Hold Me Up",
-        left: "Conor Maynard",
-        right: "2 days ago",
-      },
-      {
-        img: "https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg",
-        main: "Hold Me Up",
-        left: "Conor Maynard",
-        right: "2 days ago",
-      },
-    ],
-    [],
-  );
-
-  const my_playlists = useMemo<RightBarItem[]>(
-    () => [
-      {
-        img: "https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg",
-        main: "Hold Me Up",
-        left: "Conor Maynard",
-        right: "2 days ago",
-      },
-      {
-        img: "https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg",
-        main: "Hold Me Up",
-        left: "Conor Maynard",
-        right: "2 days ago",
-      },
-    ],
-    [],
-  );
-
-  const menus = useMemo<RightBarMenu[]>(
+  const menus = useMemo<RightBarMenuProps[]>(
     () => [
       {
         label: "Recently Played",
         href: urls.RECENTLY_PLAYED,
-        items: recently_played,
+        items: up,
       },
       {
         label: "My Playlists",
         href: urls.MY_PLAYLISTS,
-        items: my_playlists,
+        items: up,
       },
     ],
-    [recently_played, my_playlists],
+    [up],
   );
 
   const handleOn = () => {
