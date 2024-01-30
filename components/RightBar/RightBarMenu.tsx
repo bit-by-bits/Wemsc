@@ -14,9 +14,7 @@ const RightBarMenu: FC<RightBarMenuProps> = ({ label, href, items }) => (
         See All
       </Link>
     </div>
-    {items?.map((e, i) => (
-      <LeftBarItem key={i} item={e} />
-    ))}
+    {items?.map((e, i) => <LeftBarItem key={i} item={e} />)}
   </div>
 );
 

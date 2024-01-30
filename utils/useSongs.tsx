@@ -49,9 +49,31 @@ const searchUploads = async (title: string): Promise<Song[]> => {
     .ilike("label", `%${title}%`)
     .order("uploaded", { ascending: false });
 
-    console.log(data);
   if (error) console.log(error.message);
   return (data as any) || [];
 };
 
-export { fetchUploads, fetchUserUploads, searchUploads };
+const fetchFavourites = async (): Promise<Song[]> => {
+  const supabase = createServerComponentClient({ cookies: cookies });
+
+  const { data: sessionData, error: sessionError } =
+    await supabase.auth.getSession();
+
+  if (sessionError) {
+    console.log(sessionError.message);
+    return [];
+  }
+
+  const { data, error } = await supabase
+    .from("favourites")
+    .select("*, songs(*)")
+    .eq("user_id", sessionData.session?.user?.id)
+    .order("uploaded", { ascending: false });
+
+  if (error) console.log(error.message);
+
+  if (!data) return [];
+  else return data.map(item => ({ ...item.songs }));
+};
+
+export { fetchUploads, fetchUserUploads, searchUploads, fetchFavourites };

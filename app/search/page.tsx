@@ -9,14 +9,7 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = async ({ searchParams }) => {
   const uploads = await searchUploads(searchParams.title);
-
-  return (
-    <HomeMenu
-      label="Searched Songs"
-      href=""
-      items={uploads}
-    />
-  );
+  return <HomeMenu label="Searched Songs" href="" items={uploads} />;
 };
 
 export default Home;
