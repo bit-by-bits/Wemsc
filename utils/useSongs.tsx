@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { Song } from "@/Interfaces";
+import { ProductWithPrice, Song } from "@/Interfaces";
 
 const fetchUploads = async (): Promise<Song[]> => {
   const supabase = createServerComponentClient({ cookies: cookies });
@@ -91,10 +91,26 @@ const fetchUploadsByID = async (id: string): Promise<Song> => {
   return (data as any) || [];
 };
 
+const fetchPaidProducts = async (): Promise<ProductWithPrice[]> => {
+  const supabase = createServerComponentClient({ cookies: cookies });
+
+  const { data, error } = await supabase
+    .from("products")
+    .select("*, prices(*)")
+    .eq("active", true)
+    .eq("prices.active", true)
+    .order("metadata->index")
+    .order("unit_amount", { referencedTable: "prices" });
+
+  if (error) console.log(error.message);
+  return (data as any) || [];
+};
+
 export {
   fetchUploads,
   fetchUploadsByUser,
   searchUploads,
   fetchFavourites,
   fetchUploadsByID,
+  fetchPaidProducts,
 };

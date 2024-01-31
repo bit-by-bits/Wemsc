@@ -1,3 +1,4 @@
+import { ProductWithPrice } from "@/Interfaces";
 import { InputHTMLAttributes, ReactNode } from "react";
 
 export interface ParentModalProps {
@@ -14,6 +15,10 @@ export interface UploadModalFileInputProps {
   register: any;
   placeholder: string;
   accept: string;
+}
+
+export interface SubModalProps {
+  products: ProductWithPrice[];
 }
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}

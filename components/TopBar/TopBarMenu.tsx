@@ -16,10 +16,13 @@ import {
   RiUploadCloudLine,
   RiUser3Line,
 } from "react-icons/ri";
+import { HiOutlineCurrencyRupee } from "react-icons/hi2";
+import useSub from "../Modal/ModalUtils/useSub";
 
 const TopBarMenu: FC = () => {
   const { user } = useUser();
   const { onOpen: onOpenAuth } = useAuth();
+  const { onOpen: onOpenSub } = useSub();
   const { onOpen: onOpenUpload } = useUpload();
 
   const router = useRouter();
@@ -65,9 +68,9 @@ const TopBarMenu: FC = () => {
           func: onOpenUpload,
         },
         {
-          icon: RiSettings3Line,
-          label: "Settings",
-          func: () => (window.location.href = urls.SETTINGS),
+          icon: HiOutlineCurrencyRupee,
+          label: "Subscribe",
+          func: () => onOpenSub(),
         },
       ];
 

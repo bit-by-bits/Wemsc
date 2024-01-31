@@ -39,8 +39,8 @@ const LeftBar: FC = () => {
         label: "Discover",
         iconOutline: RiCompassDiscoverLine,
         iconFilled: RiCompassDiscoverFill,
-        href: urls.DISCOVER,
-        active: path === urls.DISCOVER,
+        href: urls.SEARCH,
+        active: path === urls.SEARCH,
       },
       {
         label: "Collections",

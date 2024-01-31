@@ -12,9 +12,9 @@ const useImageLoader: (song: Song) => string | null = (song: Song) => {
   return imageData.publicUrl;
 };
 
-const useSongLoader = (song: Song) => {
+const useSongLoader: (song: Song) => string | null = (song: Song) => {
   const { storage } = useSupabaseClient();
-  if (!song) return "";
+  if (!song) return null;
 
   const { data: songData } = storage.from("songs").getPublicUrl(song.href);
 

@@ -2,7 +2,6 @@ type urlsType = { [key: string]: string };
 
 const urls = {
   COLLECTIONS: "/collections",
-  DISCOVER: "/discover",
   DOWNLOADS: "/downloads",
   FAVOURITES: "/favourites",
   HOME: "/",
@@ -12,7 +11,12 @@ const urls = {
   PROFILE: "/profile",
   RECENTLY_PLAYED: "/recently-played",
   SEARCH: "/search",
-  SETTINGS: "/settings",
+
+  // API
+
+  CHECKOUT_SESSION: "/api/checkout-session",
+  CREATE_PORTAL_LINK: "/api/create-portal-link",
+  WEBHOOKS: "/api/webhooks",
 } as urlsType;
 
 export default urls;

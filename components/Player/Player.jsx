@@ -15,7 +15,7 @@ import { useImageLoader } from "@/utils/useSongMeta";
 
 const Player = ({ song, URL }) => {
   const { ids, activeID, setID } = usePlayer();
-  const image = useImageLoader(song) || "/placeholder.png";
+  const image = useImageLoader(song);
 
   const [volume, setVolume] = useState(1);
   const [speed, setSpeed] = useState(1);
@@ -58,7 +58,7 @@ const Player = ({ song, URL }) => {
   const onSlow = () => {
     const newSpeed = Math.max(speed - 0.1, 0.5);
     if (newSpeed < 0.5) {
-      toast.error("Minimum speed reached");
+      toast.error("Min Speed Reached");
       return;
     }
 
@@ -69,7 +69,7 @@ const Player = ({ song, URL }) => {
   const onFast = () => {
     const newSpeed = Math.min(speed + 0.1, 2);
     if (newSpeed > 2) {
-      toast.error("Maximum speed reached");
+      toast.error("Max Speed Reached");
       return;
     }
 
@@ -92,7 +92,7 @@ const Player = ({ song, URL }) => {
         <div className="relative flex items-center justify-center gap-4">
           <Image
             radius="sm"
-            src={image}
+            src={image || "/placeholder.png"}
             alt={song.label}
             removeWrapper
             className="absolute max-h-[200px] min-w-[18vw] transform -translate-y-[calc(100%+1rem)] -left-4 top-0"
@@ -125,7 +125,7 @@ const Player = ({ song, URL }) => {
             step={0.01}
             minValue={0}
             maxValue={duration / 1000}
-            value={progress}
+            value={progress ?? 0}
             className="min-w-[40vw]"
             onChange={val => {
               setProgress(val);
@@ -147,7 +147,7 @@ const Player = ({ song, URL }) => {
             minValue={0}
             maxValue={1}
             step={0.01}
-            value={volume}
+            value={volume ?? 0}
             onChange={vol => setVolume(vol)}
           />
         </div>

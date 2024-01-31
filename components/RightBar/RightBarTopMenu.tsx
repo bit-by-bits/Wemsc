@@ -1,5 +1,4 @@
 import React, { FC, useState, useEffect, useRef } from "react";
-import useAuth from "../Modal/ModalUtils/useAuth";
 import { FaAngleDown } from "react-icons/fa6";
 
 const RightBarTopMenu: FC = () => {

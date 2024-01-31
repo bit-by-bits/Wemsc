@@ -36,12 +36,12 @@ const RightBar: FC<RightBarProps> = ({ up }) => {
 
   const handleOn = () => {
     setDND(false);
-    toast.success("Notifications turned on");
+    toast.success("DND Mode Off");
   };
 
   const handleOff = () => {
     setDND(true);
-    toast.success("Notifications turned off");
+    toast.success("DND Mode On");
   };
 
   return (

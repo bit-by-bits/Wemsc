@@ -1,15 +1,15 @@
 "use client";
 
+import urls from "@/URL";
 import React, { FC, useState } from "react";
 import Modal from "./ParentModal";
-import { Price, ProductWithPrice } from "@/Interfaces";
+import { Price } from "@/Interfaces";
 import { useUser } from "@/utils/useUser";
 import toast from "react-hot-toast";
 import useSub from "./ModalUtils/useSub";
-
-interface SubModalProps {
-  products: ProductWithPrice[];
-}
+import { postData } from "@/utils/useAPI";
+import { fetchSTRIPE } from "@/utils/useStripe";
+import { SubModalProps } from "./Interfaces";
 
 const formatPrice = (price: Price) => {
   return new Intl.NumberFormat("en-US", {
@@ -28,27 +28,26 @@ const SubModal: FC<SubModalProps> = ({ products }) => {
 
   const handleCheckout = async (price: Price) => {
     try {
-      if (!user) throw new Error("Must be logged in");
-      if (sub) throw new Error("Already subscribed");
+      if (!user) throw new Error("User Not Found");
+      if (sub) throw new Error("User Already Subscribed");
 
       setPriceIdLoading(price.id);
 
-      // Uncomment the following lines when integrating with your checkout logic
-      // const { sessionId } = await postData({
-      //   url: "/api/create-checkout-session",
-      //   data: { price },
-      // });
+      const { sessionId } = await postData({
+        URL: urls.CHECKOUT_SESSION,
+        data: { price },
+      });
 
-      // const stripe = await getStripe();
-      // stripe?.redirectToCheckout({ sessionId });
+      const STRIPE = await fetchSTRIPE();
+      STRIPE?.redirectToCheckout({ sessionId });
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "An error occurred");
+      toast.error(error instanceof Error ? error.message : "Error");
     } finally {
       setPriceIdLoading(undefined);
     }
   };
 
-  let content;
+  let content = <div className="text-center mb-2">No products available.</div>;
 
   if (products.length) {
     content = (
@@ -66,7 +65,7 @@ const SubModal: FC<SubModalProps> = ({ products }) => {
                 key={price.id}
                 onClick={() => handleCheckout(price)}
                 disabled={loading || price.id === priceIdLoading}
-                className="mb-4"
+                className="w-full rounded-full py-2 px-4 bg-link-active hover:bg-opacity-75 text-white mb-4"
               >
                 {`Subscribe for ${formatPrice(price)} a ${price.interval}`}
               </button>
@@ -75,13 +74,10 @@ const SubModal: FC<SubModalProps> = ({ products }) => {
         })}
       </div>
     );
-  } else {
-    content = (
-      <div className="text-center">
-        {sub ? "Already subscribed." : "No products available."}
-      </div>
-    );
   }
+
+  if (sub)
+    content = <div className="text-center mb-2">Already subscribed.</div>;
 
   return (
     <Modal

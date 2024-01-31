@@ -9,7 +9,7 @@ import PlayButton from "../Button/PlayButton";
 
 const HomeCard: FC<HomeCardProps> = ({ item, onPlay }) => {
   const [show, setShow] = useState(false);
-  const image = useImageLoader(item) || "/placeholder.png";
+  const image = useImageLoader(item);
 
   return (
     <div
@@ -19,7 +19,7 @@ const HomeCard: FC<HomeCardProps> = ({ item, onPlay }) => {
     >
       <Image
         className="h-[200px] w-full"
-        src={image}
+        src={image || "/placeholder.png"}
         alt={item.label}
         radius="sm"
         removeWrapper

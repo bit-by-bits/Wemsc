@@ -8,10 +8,10 @@ import { Toaster } from "react-hot-toast";
 import UploadModal from "./Modal/UploadModal";
 
 interface UIElementsProps {
-  pwp: ProductWithPrice[];
+  products: ProductWithPrice[];
 }
 
-const UIElements: FC<UIElementsProps> = ({ pwp }) => {
+const UIElements: FC<UIElementsProps> = ({ products }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const UIElements: FC<UIElementsProps> = ({ pwp }) => {
         toastOptions={{ style: { background: "#101011", color: "#fff" } }}
       />
       <AuthModal />
-      <SubModal products={pwp} />
+      <SubModal products={products} />
       <UploadModal />
     </>
   ) : null;

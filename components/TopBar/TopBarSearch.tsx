@@ -37,7 +37,7 @@ const TopBarSearch: FC<TopBarSearchProps> = ({
       </div>
       <input
         type="text"
-        value={text}
+        value={text ?? ""}
         onChange={handleChange}
         onBlur={handleBlur}
         onFocus={handleFocus}

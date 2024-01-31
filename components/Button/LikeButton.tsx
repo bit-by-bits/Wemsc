@@ -18,7 +18,7 @@ const LikeButton: FC<LikeButtonProps> = ({ songID, show }) => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!user?.id) return;
+    if (!user?.id || !songID) return;
 
     const fetchData = async () => {
       const { data, error } = await supabaseClient

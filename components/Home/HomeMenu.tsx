@@ -26,7 +26,11 @@ const HomeMenu: FC<HomeMenuProps> = ({ label, href, items }) => {
         )}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 gap-x-6">
-        {items?.map((e, i) => <HomeCard key={i} item={e} onPlay={play} />)}
+        {items?.length === 0 ? (
+          <div className="text-white">No songs found</div>
+        ) : (
+          items?.map((e, i) => <HomeCard key={i} item={e} onPlay={play} />)
+        )}
       </div>
     </div>
   );

@@ -73,7 +73,7 @@ const UploadModal: FC = () => {
       const songFile = values.song?.[0];
 
       if (!imageFile || !songFile || !user) {
-        toast.error("Missing fields");
+        toast.error("Fields Not Filled");
         return;
       }
 
@@ -94,7 +94,7 @@ const UploadModal: FC = () => {
 
       if (songError) {
         setIsLoading(false);
-        return toast.error("Failed song upload");
+        return toast.error("Song Upload Failed");
       }
 
       const { data: imageData, error: imageError } = await uploadFile(
@@ -104,7 +104,7 @@ const UploadModal: FC = () => {
 
       if (imageError) {
         setIsLoading(false);
-        return toast.error("Failed image upload");
+        return toast.error("Image Upload Failed");
       }
 
       const { error: supabaseError } = await supabaseClient

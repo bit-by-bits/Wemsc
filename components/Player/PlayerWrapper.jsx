@@ -10,8 +10,7 @@ const PlayerWrapper = () => {
   const { song } = useFetchByID(activeID ?? "");
   const URL = useSongLoader(song);
 
-  console.log("PlayerWrapper", { activeID, song, URL });
-  if (!song || !URL || !activeID) return null;
+  if (!activeID || !song || !URL) return null;
 
   return (
     <div className="fixed left-0 bottom-0 bg-black w-screen z-50">
