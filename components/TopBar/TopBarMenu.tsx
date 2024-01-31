@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import urls from "@/URL";
 import React, { FC, useState, useEffect, useRef, useMemo } from "react";

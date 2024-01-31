@@ -7,7 +7,7 @@ import usePlayer from "./usePlayer";
 import useAuth from "@/components/Modal/ModalUtils/useAuth";
 
 const usePlay = (songs: Song[]) => {
-  const { setId, setIds } = usePlayer();
+  const { setID, setIDs } = usePlayer();
   // const { onOpen: onOpenSub } = useSub();
   const { onOpen: onOpenAuth } = useAuth();
   const { sub, user } = useUser();
@@ -16,10 +16,10 @@ const usePlay = (songs: Song[]) => {
     if (!user) return onOpenAuth();
     // if (!sub) return onOpenSub();
 
-    setId(id);
-    setIds(songs.map(song => song.id));
+    setID(id);
+    setIDs(songs.map(song => song.id));
 
-    console.log(id);
+    console.log(id + " " + songs.map(song => song.label));
   };
 
   return onPlay;

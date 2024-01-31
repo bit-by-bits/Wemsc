@@ -1,12 +1,12 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 import useAuth from "../Modal/ModalUtils/useAuth";
 import { useUser } from "@/utils/useUser";
+import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 
 const LikeButton: FC<LikeButtonProps> = ({ songID, show }) => {
   const router = useRouter();
@@ -34,7 +34,7 @@ const LikeButton: FC<LikeButtonProps> = ({ songID, show }) => {
     fetchData();
   }, [songID, supabaseClient, user?.id]);
 
-  const Icon = isLiked ? AiFillHeart : AiOutlineHeart;
+  const Icon = isLiked ? RiHeart3Fill : RiHeart3Line;
 
   const handleLike = async () => {
     if (!user) return onOpen;

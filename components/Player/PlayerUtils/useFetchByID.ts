@@ -26,7 +26,7 @@ const useFetchByID = (id?: string) => {
         return toast.error(error.message);
       }
 
-      setSong(song);
+      setSong(data as Song);
       setIsLoading(false);
     };
 

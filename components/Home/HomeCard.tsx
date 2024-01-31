@@ -25,7 +25,7 @@ const HomeCard: FC<HomeCardProps> = ({ item, onPlay }) => {
         removeWrapper
       />
       <div className="flex flex-row justify-between items-center w-full">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col">
           <span className="ml-2 text-white mt-2">{item.label}</span>
           <span className="ml-2 text-xs">{item.author}</span>
         </div>
