@@ -2,7 +2,6 @@
 
 import urls from "@/URL";
 import React, { FC, useState } from "react";
-import Modal from "./ParentModal";
 import { Price } from "@/Interfaces";
 import { useUser } from "@/utils/useUser";
 import toast from "react-hot-toast";
@@ -10,6 +9,7 @@ import useSub from "./ModalUtils/useSub";
 import { postData } from "@/utils/useAPI";
 import { fetchSTRIPE } from "@/utils/useStripe";
 import { SubModalProps } from "./Interfaces";
+import ParentModal from "./ParentModal";
 
 const formatPrice = (price: Price) => {
   return new Intl.NumberFormat("en-US", {
@@ -80,14 +80,14 @@ const SubModal: FC<SubModalProps> = ({ products }) => {
     content = <div className="text-center mb-2">Already subscribed.</div>;
 
   return (
-    <Modal
+    <ParentModal
       title="Subscribe!"
       description="Subscribe to get access to all the features."
       isOpen={isOpen}
       onChange={onChange}
     >
       {content}
-    </Modal>
+    </ParentModal>
   );
 };
 

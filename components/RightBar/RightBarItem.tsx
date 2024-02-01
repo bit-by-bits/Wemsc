@@ -3,13 +3,21 @@ import { FC } from "react";
 import { RightBarItemProps } from "./Interfaces";
 import { useImageLoader } from "@/utils/useSongMeta";
 import { convertTime } from "@/utils/useTime";
+import { useRouter } from "next/navigation";
+import urls from "@/URL";
 
 const RightBarItem: FC<RightBarItemProps> = ({ item }) => {
+  const router = useRouter();
   const last = convertTime(item.uploaded);
   const image = useImageLoader(item) || "/placeholder.png";
 
+  const onMore = () => router.push(`${urls.SONG}/${item.id}`);
+
   return (
-    <div className="flex flex-row justify-between items-center cursor-pointer hover:bg-gray-900 rounded-lg p-2 w-full">
+    <div
+      className="flex flex-row justify-between items-center cursor-pointer hover:bg-gray-900 rounded-lg p-2 w-full"
+      onClick={onMore}
+    >
       <div className="flex flex-row items-center gap-2">
         <Skeleton isLoaded={!!image}>
           <Avatar radius="sm" src={image} alt={item.label} />

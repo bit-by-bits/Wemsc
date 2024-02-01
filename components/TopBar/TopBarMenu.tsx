@@ -18,9 +18,12 @@ import {
 } from "react-icons/ri";
 import { HiOutlineCurrencyRupee } from "react-icons/hi2";
 import useSub from "../Modal/ModalUtils/useSub";
+import usePlayer from "../Player/PlayerUtils/usePlayer";
 
 const TopBarMenu: FC = () => {
   const { user } = useUser();
+  const { reset } = usePlayer();
+
   const { onOpen: onOpenAuth } = useAuth();
   const { onOpen: onOpenSub } = useSub();
   const { onOpen: onOpenUpload } = useUpload();
@@ -49,6 +52,7 @@ const TopBarMenu: FC = () => {
       toast.error("Logout Failed");
     } else toast.success("Logout Successful");
 
+    reset();
     router.refresh();
   };
 

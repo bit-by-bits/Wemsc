@@ -7,6 +7,7 @@ import { useSessionContext } from "@supabase/auth-helpers-react";
 import useAuth from "../Modal/ModalUtils/useAuth";
 import { useUser } from "@/utils/useUser";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
+import ToolTip from "./ToolTip";
 
 const LikeButton: FC<LikeButtonProps> = ({ songID, show }) => {
   const router = useRouter();
@@ -71,7 +72,9 @@ const LikeButton: FC<LikeButtonProps> = ({ songID, show }) => {
       className={`cursor-pointer hover:opacity-75 transition-opacity duration-300 ease-in-out ${show ? "opacity-100" : "opacity-0"}`}
       onClick={handleLike}
     >
-      <Icon color={isLiked ? "#E93536" : "white"} size={25} />
+      <ToolTip text={isLiked ? "Unlike" : "Like"}>
+        <Icon color={isLiked ? "#E93536" : "white"} size={25} />
+      </ToolTip>
     </button>
   );
 };

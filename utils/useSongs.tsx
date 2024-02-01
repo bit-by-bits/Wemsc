@@ -76,7 +76,7 @@ const fetchFavourites = async (): Promise<Song[]> => {
   else return data.map(item => ({ ...item.songs }));
 };
 
-const fetchUploadsByID = async (id: string): Promise<Song> => {
+const fetchUploadByID = async (id: string): Promise<Song> => {
   const supabase = createServerComponentClient({ cookies: cookies });
 
   if (id === "") return {} as Song;
@@ -86,6 +86,23 @@ const fetchUploadsByID = async (id: string): Promise<Song> => {
     .select("*")
     .eq("id", id)
     .single();
+
+  if (error) console.log(error.message);
+  return (data as any) || [];
+};
+
+const fetchUploadsByIDs = async (ids: string[]): Promise<Song[]> => {
+  const supabase = createServerComponentClient({ cookies: cookies });
+
+  if (ids.length === 0) return [];
+
+  const numericIds = ids.map(id => parseInt(id, 10));
+
+  const { data, error } = await supabase
+    .from("songs")
+    .select("*")
+    .in("id", numericIds)
+    .order("uploaded", { ascending: false });
 
   if (error) console.log(error.message);
   return (data as any) || [];
@@ -111,6 +128,7 @@ export {
   fetchUploadsByUser,
   searchUploads,
   fetchFavourites,
-  fetchUploadsByID,
+  fetchUploadByID,
   fetchPaidProducts,
+  fetchUploadsByIDs,
 };

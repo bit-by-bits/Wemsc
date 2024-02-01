@@ -1,13 +1,20 @@
+import urls from "@/URL";
+import { useRouter } from "next/navigation";
 import React, { FC, useState, useEffect, useRef } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 
 const RightBarTopMenu: FC = () => {
+  const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const seeAll = () => {
+    router.push(urls.NOTIFICATIONS);
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -32,7 +39,7 @@ const RightBarTopMenu: FC = () => {
         className="cursor-pointer hover:text-white"
       />
       {isMenuOpen && (
-        <div className="bg-black text-white absolute top-10 right-0 flex flex-col rounded p-1 max-h-[200px] overflow-y-auto scrollbar-hide max-w-[200px] min-w-[150px]">
+        <div className="bg-black text-white absolute top-10 right-0 flex flex-col rounded p-2 max-h-[200px] overflow-y-auto scrollbar-hide max-w-[200px] min-w-[150px] z-50">
           {items?.length === 0 ? (
             <div className="p-2 text-center">No items</div>
           ) : (
@@ -45,6 +52,12 @@ const RightBarTopMenu: FC = () => {
               </div>
             ))
           )}
+          <button
+            onClick={seeAll}
+            className="py-2 px-4 bg-link-active hover:bg-opacity-75 text-white w-full rounded-lg"
+          >
+            See All
+          </button>
         </div>
       )}
     </div>

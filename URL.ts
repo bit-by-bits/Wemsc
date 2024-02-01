@@ -9,8 +9,9 @@ const urls = {
   MY_PLAYLISTS: "/my-playlists",
   NOTIFICATIONS: "/notifications",
   PROFILE: "/profile",
-  RECENTLY_PLAYED: "/recently-played",
+  QUEUE: "/queue",
   SEARCH: "/search",
+  SONG: "/song",
 
   // API
 

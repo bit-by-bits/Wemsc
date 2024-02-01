@@ -2,8 +2,8 @@
 
 import usePlayer from "./PlayerUtils/usePlayer";
 import { useSongLoader } from "@/utils/useSongMeta";
-import useFetchByID from "./PlayerUtils/useFetchByID";
 import Player from "./Player";
+import { useFetchByID } from "./PlayerUtils/usePlayerID";
 
 const PlayerWrapper = () => {
   const { activeID } = usePlayer();

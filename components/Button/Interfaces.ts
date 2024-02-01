@@ -5,5 +5,10 @@ interface LikeButtonProps {
 
 interface PlayButtonProps {
   onPlay: () => void;
-  show: boolean;
+  mode: number;
+}
+
+interface ToolTipProps {
+  text: string | JSX.Element;
+  children: React.ReactNode;
 }

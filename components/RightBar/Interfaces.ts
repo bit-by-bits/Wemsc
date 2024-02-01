@@ -1,6 +1,7 @@
 import { Song } from "@/Interfaces";
 
 export interface RightBarProps {
+  fav: Song[];
   up: Song[];
 }
 

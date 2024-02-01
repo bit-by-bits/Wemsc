@@ -19,7 +19,7 @@ const usePlay = (songs: Song[]) => {
     setID(id);
     setIDs(songs.map(song => song.id));
 
-    console.log(id + " " + songs.map(song => song.label));
+    console.log(songs);
   };
 
   return onPlay;

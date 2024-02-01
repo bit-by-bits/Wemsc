@@ -23,7 +23,7 @@ const ParentModal: FC<ParentModalProps> = ({
               {description}
             </div>
           )}
-          <div>{children}</div>
+          <span>{children}</span>
         </ModalBody>
       </ModalContent>
     </Modal>

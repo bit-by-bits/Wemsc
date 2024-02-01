@@ -14,7 +14,11 @@ const RightBarMenu: FC<RightBarMenuProps> = ({ label, href, items }) => (
         See All
       </Link>
     </div>
-    {items?.map((e, i) => <LeftBarItem key={i} item={e} />)}
+    {items?.length === 0 ? (
+      <div className="text-sm">No songs found</div>
+    ) : (
+      items?.slice(0, 3).map((e, i) => <LeftBarItem key={i} item={e} />)
+    )}
   </div>
 );
 

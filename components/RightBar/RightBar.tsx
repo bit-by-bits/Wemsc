@@ -12,26 +12,25 @@ import RightBarTopMenu from "./RightBarTopMenu";
 import useAuth from "../Modal/ModalUtils/useAuth";
 import { RightBarMenuProps, RightBarProps } from "./Interfaces";
 
-const RightBar: FC<RightBarProps> = ({ up }) => {
+const RightBar: FC<RightBarProps> = ({ fav, up }) => {
   const { onOpen } = useAuth();
   const { user, userName, userPhoto } = useUser();
 
   const [DND, setDND] = useState<boolean>(false);
-
   const menus = useMemo<RightBarMenuProps[]>(
     () => [
       {
-        label: "Recently Played",
-        href: urls.RECENTLY_PLAYED,
-        items: up,
+        label: "Favourite Songs",
+        href: urls.FAVOURITES,
+        items: fav,
       },
       {
-        label: "My Playlists",
-        href: urls.MY_PLAYLISTS,
+        label: "Uploaded Songs",
+        href: urls.LOCAL_FILES,
         items: up,
       },
     ],
-    [up],
+    [fav, up],
   );
 
   const handleOn = () => {

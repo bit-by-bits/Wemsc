@@ -15,7 +15,7 @@ const Subscription = (
   btnText: string,
 ) => (
   <div className="flex flex-col gap-y-4">
-    <div>{mainText}</div>
+    <span>{mainText}</span>
     <button
       disabled={load}
       onClick={func}

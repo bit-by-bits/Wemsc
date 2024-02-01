@@ -15,12 +15,11 @@ const Home: NextPage = async () => {
       <div className="w-full mb-2">
         <div className="flex flex-col items-center justify-center w-full h-[40vh] bg-[#30D7F7] bg-opacity-50 rounded-lg">
           <span className="text-5xl font-bold text-white">{greeting}</span>
-          <span className="text-3xl font-semibold text-white"></span>
         </div>
       </div>
       <HomeMenu
         label="Uploaded Songs"
-        href={urls.RECENTLY_PLAYED}
+        href={urls.LOCAL_FILES}
         items={uploads}
       />
       <HomeMenu

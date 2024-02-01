@@ -4,6 +4,7 @@ import { Song } from "@/Interfaces";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useSessionContext } from "@supabase/auth-helpers-react";
+import usePlayer from "./usePlayer";
 
 const useFetchByID = (id?: string) => {
   const [loading, setIsLoading] = useState(false);
@@ -36,4 +37,9 @@ const useFetchByID = (id?: string) => {
   return useMemo(() => ({ loading, song }), [loading, song]);
 };
 
-export default useFetchByID;
+const useFetchIDs = () => {
+  const { ids } = usePlayer();
+  return ids;
+};
+
+export { useFetchByID, useFetchIDs };
