@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import HomeCard from "./HomeCard";
 import Link from "next/link";
 import { HomeMenuProps } from "./Interfaces";
@@ -8,6 +8,18 @@ import usePlay from "../Player/PlayerUtils/usePlay";
 
 const HomeMenu: FC<HomeMenuProps> = ({ label, href, items }) => {
   const play = usePlay(items);
+  const [cards, setCards] = useState(1);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setCards(width >= 1536 ? 4 : width >= 1024 ? 3 : width >= 640 ? 2 : 1);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div
@@ -29,10 +41,13 @@ const HomeMenu: FC<HomeMenuProps> = ({ label, href, items }) => {
         {items?.length === 0 ? (
           <div className="text-white">No songs found</div>
         ) : (
-          items?.map((e, i) => <HomeCard key={i} item={e} onPlay={play} />)
+          items
+            ?.slice(0, cards)
+            .map((e, i) => <HomeCard key={i} item={e} onPlay={play} />)
         )}
       </div>
     </div>
   );
 };
+
 export default HomeMenu;

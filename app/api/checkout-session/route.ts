@@ -30,8 +30,8 @@ export async function POST(request: Request) {
       mode: "subscription",
       allow_promotion_codes: true,
       subscription_data: { metadata: metadata },
-      success_url: `${URL}${urls.PROFILE}`,
-      cancel_url: `${URL}${urls.HOME}`,
+      success_url: urls.PROFILE,
+      cancel_url: urls.HOME,
     });
 
     return NextResponse.json({ sessionId: SESSION.id });

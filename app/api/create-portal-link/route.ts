@@ -24,7 +24,7 @@ export async function POST() {
 
     const { url } = await STRIPE.billingPortal.sessions.create({
       customer: customer,
-      return_url: `${URL}${urls.PROFILE}`,
+      return_url: urls.PROFILE,
     });
 
     return NextResponse.json({ url });
