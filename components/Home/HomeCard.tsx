@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useState } from "react";
-import { Image, Skeleton } from "@nextui-org/react";
+import { Image } from "@nextui-org/react";
 import { HomeCardProps } from "./Interfaces";
 import { useImageLoader } from "@/utils/useSongMeta";
 import LikeButton from "../Button/LikeButton";
@@ -26,15 +26,13 @@ const HomeCard: FC<HomeCardProps> = ({ item, onPlay }) => {
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
     >
-      <Skeleton className="w-full" isLoaded={!!image}>
-        <Image
-          className="h-[200px] w-full"
-          src={image}
-          alt={item.label}
-          radius="sm"
-          removeWrapper
-        />
-      </Skeleton>
+      <Image
+        className="h-[150px] xl:h-[200px] 2xl:h-[250px] w-full bg-black"
+        src={image}
+        alt={item.label}
+        radius="sm"
+        removeWrapper
+      />
       <div className="flex flex-row justify-between items-center w-full">
         <div className="flex flex-col mt-2">
           <span

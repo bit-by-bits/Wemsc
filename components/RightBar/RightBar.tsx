@@ -46,7 +46,7 @@ const RightBar: FC<RightBarProps> = ({ fav, up }) => {
   };
 
   return (
-    <div className="flex flex-col items-center h-screen p-4 bg-menu-bg transition-all duration-300 min-w-[25vw]">
+    <div className="flex flex-col items-center h-screen p-4 bg-menu-bg transition-all duration-300 min-w-[25vw] 2xl:min-w-[20vw]">
       <div className="flex items-center justify-between w-full mb-4">
         <div className="flex flex-row items-center gap-2">
           <Avatar

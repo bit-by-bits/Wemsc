@@ -16,7 +16,6 @@ export function convertTime(timestamp: string): string {
 }
 
 export function getGreeting(): string {
-  return "morning";
   const hours = new Date().getHours();
   if (hours >= 4 && hours < 12) return "morning";
   else if (hours >= 12 && hours < 17) return "afternoon";

@@ -7,6 +7,8 @@ import usePlayer from "./PlayerUtils/usePlayer";
 import { IoPause, IoPlay } from "react-icons/io5";
 import { RiSlowDownFill, RiSpeedUpFill } from "react-icons/ri";
 import {
+  LuRepeat,
+  LuShuffle,
   LuSkipBack,
   LuSkipForward,
   LuVolume2,
@@ -15,7 +17,7 @@ import {
 import { formatTime } from "@/utils/useTime";
 import toast from "react-hot-toast";
 import { useImageLoader } from "@/utils/useSongMeta";
-import { MdDevices, MdHeadset, MdShare } from "react-icons/md";
+import { MdClear, MdDevices, MdHeadset, MdShare } from "react-icons/md";
 import { PiQueue } from "react-icons/pi";
 import urls from "@/URL";
 import { useRouter } from "next/navigation";
@@ -48,6 +50,7 @@ const Player = ({ song, URL }) => {
   const [progress, setProgress] = useState(0);
   const [timer, setTimer] = useState("0:00");
   const [device, setDevice] = useState(undefined);
+  const [show, setShow] = useState(true);
 
   const [play, { pause, sound, duration }] = useSound(URL, {
     volume: volume,
@@ -60,6 +63,10 @@ const Player = ({ song, URL }) => {
       onNext();
     },
   });
+
+  const onClear = () => {
+    setShow(false);
+  };
 
   const onDownload = async () => {
     const { data, error } = await supabaseClient.storage
@@ -79,8 +86,8 @@ const Player = ({ song, URL }) => {
       .from("downloads")
       .insert({ song_id: song.id, user_id: user.id });
 
-    if (err) toast.error(err.message);
-    else toast.success("Downloaded");
+    if (err) console.log(err.message);
+    toast.success("Downloaded");
   };
 
   const onNext = () => {
@@ -105,6 +112,17 @@ const Player = ({ song, URL }) => {
     const newSpeed = Math.min(speed + 0.1, 2);
     if (newSpeed >= 2) toast.error("Max Speed Reached");
     else setSpeed(newSpeed);
+  };
+
+  const onShuffle = () => {
+    const shuffled = ids.sort(() => Math.random() - 0.5);
+    setID(shuffled[0]);
+  };
+
+  const onRepeat = () => {
+    sound?.stop();
+    sound?.play();
+    setID(activeID);
   };
 
   setInterval(() => setProgress(Math.round(sound?.seek())), 500);
@@ -135,20 +153,29 @@ const Player = ({ song, URL }) => {
   }, [sound]);
 
   useEffect(() => {
-    setTimer(formatTime(progress));
+    setTimer(formatTime(Math.round(sound?.seek())));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [progress]);
 
   return (
     <div className="grid grid-cols-3 h-full w-full p-4">
       <div className="flex w-full justify-start">
         <div className="relative flex items-center justify-center gap-2">
-          <Image
-            radius="sm"
-            src={image || "/placeholder.png"}
-            alt={song.label}
-            removeWrapper
-            className="absolute max-h-[200px] min-w-[18vw] transform -translate-y-[calc(100%+1rem)] -left-4 top-0"
-          />
+          {show && (
+            <>
+              <Image
+                radius="sm"
+                src={image || "/placeholder.png"}
+                alt={song.label}
+                removeWrapper
+                className="absolute max-h-[200px] min-w-[18vw] 2xl:min-w-[15vw] 2xl:min-h-[250px] transform -translate-y-[calc(100%+1rem)] -left-4 top-0"
+              />
+              <MdClear
+                className="text-2xl hover:text-red-500 cursor-pointer transition-all duration-300 ease-in-out absolute -translate-y-[calc(100%+1.5rem)] top-0 -left-2 z-10 text-white"
+                onClick={onClear}
+              />
+            </>
+          )}
           <div className="flex flex-col">
             <span
               className="text-white text-sm hover:underline cursor-pointer"
@@ -166,6 +193,7 @@ const Player = ({ song, URL }) => {
       <div className="w-full h-full flex flex-col items-center justify-center gap-2">
         <div className="flex items-center justify-center gap-4">
           {makeIcon(RiSlowDownFill, onSlow, "Slow Down Song")}
+          {makeIcon(LuShuffle, onShuffle, "Shuffle Songs")}
           {makeIcon(LuSkipBack, onPrev, "Previous Song")}
           <div
             onClick={togglePlay}
@@ -178,6 +206,7 @@ const Player = ({ song, URL }) => {
             )}
           </div>
           {makeIcon(LuSkipForward, onNext, "Next Song")}
+          {makeIcon(LuRepeat, onRepeat, "Repeat Song")}
           {makeIcon(RiSpeedUpFill, onFast, "Speed Up Song")}
         </div>
         <div className="flex items-center justify-center gap-4 w-full">

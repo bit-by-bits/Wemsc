@@ -123,6 +123,29 @@ const fetchPaidProducts = async (): Promise<ProductWithPrice[]> => {
   return (data as any) || [];
 };
 
+const fetchDownloads = async (): Promise<Song[]> => {
+  const supabase = createServerComponentClient({ cookies: cookies });
+
+  const { data: sessionData, error: sessionError } =
+    await supabase.auth.getSession();
+
+  if (sessionError) {
+    console.log(sessionError.message);
+    return [];
+  }
+
+  const { data, error } = await supabase
+    .from("downloads")
+    .select("*, songs(*)")
+    .eq("user_id", sessionData.session?.user?.id)
+    .order("uploaded", { ascending: false });
+
+  if (error) console.log(error.message);
+
+  if (!data) return [];
+  else return data.map(item => ({ ...item.songs }));
+};
+
 export {
   fetchUploads,
   fetchUploadsByUser,
@@ -131,4 +154,5 @@ export {
   fetchUploadByID,
   fetchPaidProducts,
   fetchUploadsByIDs,
+  fetchDownloads,
 };

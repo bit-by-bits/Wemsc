@@ -98,7 +98,7 @@ const LeftBar: FC = () => {
 
   return (
     <div
-      className={`flex flex-col items-center h-screen p-4 bg-menu-bg transition-all duration-300 ${isOpen ? "min-w-[18vw]" : "w-[5vw]"}`}
+      className={`flex flex-col items-center h-screen p-4 bg-menu-bg transition-all duration-300 ${isOpen ? "min-w-[18vw] 2xl:min-w-[15vw]" : "w-[5vw]"}`}
     >
       <div
         className={`flex flex-${

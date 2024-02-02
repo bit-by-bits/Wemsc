@@ -46,12 +46,10 @@ const TopBarSearch: FC<TopBarSearchProps> = ({
       />
       <div className="flex items-center absolute inset-y-0 right-0 pr-3">
         {text.length > 0 && (
-          <button
+          <MdClear
+            className="text-2xl hover:text-red-500 cursor-pointer transition-all duration-300 ease-in-out"
             onClick={clearText}
-            className="cursor-pointer hover:text-white transition-all"
-          >
-            <MdClear className="text-2xl hover:text-red-500" />
-          </button>
+          />
         )}
       </div>
     </div>

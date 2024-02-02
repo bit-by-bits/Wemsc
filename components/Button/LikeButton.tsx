@@ -17,6 +17,7 @@ const LikeButton: FC<LikeButtonProps> = ({ songID, show }) => {
   const { onOpen } = useAuth();
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
+  const Icon = isLiked ? RiHeart3Fill : RiHeart3Line;
 
   useEffect(() => {
     if (!user?.id || !songID) return;
@@ -34,8 +35,6 @@ const LikeButton: FC<LikeButtonProps> = ({ songID, show }) => {
 
     fetchData();
   }, [songID, supabaseClient, user?.id]);
-
-  const Icon = isLiked ? RiHeart3Fill : RiHeart3Line;
 
   const handleLike = async () => {
     if (!user) return onOpen();
@@ -73,7 +72,7 @@ const LikeButton: FC<LikeButtonProps> = ({ songID, show }) => {
       onClick={handleLike}
     >
       <ToolTip text={isLiked ? "Unlike" : "Like"}>
-        <Icon color={isLiked ? "#E93536" : "white"} size={25} />
+        <Icon color={isLiked ? "#E93536" : "white"} className="text-xl" />
       </ToolTip>
     </button>
   );
