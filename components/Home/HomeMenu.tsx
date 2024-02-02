@@ -10,6 +10,8 @@ const HomeMenu: FC<HomeMenuProps> = ({ label, href, items }) => {
   const play = usePlay(items);
   const [cards, setCards] = useState(1);
 
+  const ITEMS = href ? items?.slice(0, cards) : items;
+
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -41,9 +43,7 @@ const HomeMenu: FC<HomeMenuProps> = ({ label, href, items }) => {
         {items?.length === 0 ? (
           <div className="text-white">No songs found</div>
         ) : (
-          items
-            ?.slice(0, cards)
-            .map((e, i) => <HomeCard key={i} item={e} onPlay={play} />)
+          ITEMS.map((e, i) => <HomeCard key={i} item={e} onPlay={play} />)
         )}
       </div>
     </div>

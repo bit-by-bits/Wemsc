@@ -1,6 +1,7 @@
 {
   "name": "wemsc",
   "version": "0.1.0",
+  "description": "A modern web music player with Next.js, Tailwind CSS, Supabase, and Stripe for seamless playback and real-time updates.",
   "private": true,
   "scripts": {
     "dev": "next dev",

@@ -30,8 +30,11 @@ const rubik = Rubik({
 } as RubikFontOptions);
 
 export const metadata: Metadata = {
-  title: "Wemsc | Music App For All Your Needs",
-  description: "Wemsc is the music platform for all your needs.",
+  title: "Wemsc - Web Music Streaming Player",
+  description:
+    "Explore Wemsc, a cutting-edge web music streaming player powered by Next.js, Tailwind CSS, Supabase, and Stripe. Enjoy seamless playback, real-time updates, and secure authentication for an immersive music experience.",
+  keywords:
+    "Wemsc, Music Player, Web Music Streaming, Next.js, Tailwind CSS, Supabase, Stripe",
 };
 
 const RootLayout: FC<RootLayoutProps> = async ({ children }) => {

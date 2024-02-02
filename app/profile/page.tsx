@@ -7,6 +7,14 @@ import useSub from "@/components/Modal/ModalUtils/useSub";
 import { useUser } from "@/utils/useUser";
 import { postData } from "@/utils/useAPI";
 import urls from "@/URL";
+import { Avatar } from "@nextui-org/react";
+
+const Detail = (top: string, btm?: string) => (
+  <div className="flex flex-col gap-2">
+    <div className="text-xl font-semibold">{top}</div>
+    <div className="text-white">{btm && btm?.length > 0 ? btm : "N/A"}</div>
+  </div>
+);
 
 const Subscription = (
   mainText: JSX.Element,
@@ -28,7 +36,7 @@ const Subscription = (
 
 const Home: NextPage = () => {
   const { onOpen } = useSub();
-  const { loading, sub, user } = useUser();
+  const { loading, sub, user, userName, userPhoto } = useUser();
 
   const router = useRouter();
   const [wait, setWait] = useState(false);
@@ -50,25 +58,42 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="text-4xl font-bold text-white mb-4">Profile</div>
-      {sub
-        ? Subscription(
-            <>
-              You are currently on the
-              <span className="font-bold"> {sub?.prices?.products?.name} </span>
-              plan.
-            </>,
-            wait || loading,
-            redirect,
-            "Open Customer Portal",
-          )
-        : Subscription(
-            <>You are not subscribed to any plan.</>,
-            wait,
-            onOpen,
-            "Subscribe To Wemsc",
-          )}
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-row items-center gap-4">
+        <span className="text-4xl font-bold text-white">Profile</span>
+        {user && <Avatar src={userPhoto} alt={userName} isBordered />}
+      </div>
+      {user ? (
+        <>
+          {Detail("User Name", userName)}
+          {Detail("User Email", user?.email)}
+          {Detail("Phone Number", user?.phone)}
+          {sub
+            ? Subscription(
+                <>
+                  You are currently on the
+                  <span className="font-bold">
+                    {" "}
+                    {sub?.prices?.products?.name}{" "}
+                  </span>
+                  plan.
+                </>,
+                wait || loading,
+                redirect,
+                "Open Customer Portal",
+              )
+            : Subscription(
+                <>You are not subscribed to any plan.</>,
+                wait,
+                onOpen,
+                "Subscribe To Wemsc",
+              )}
+        </>
+      ) : (
+        <div className="h-full w-full flex items-center justify-center text-center">
+          <span>You are not logged in.</span>
+        </div>
+      )}
     </div>
   );
 };
