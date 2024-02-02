@@ -28,7 +28,7 @@ const SubModal: FC<SubModalProps> = ({ products }) => {
 
   const handleCheckout = async (price: Price) => {
     try {
-      if (!user) throw new Error("User Not Found");
+      if (!user) throw new Error("Please Login");
       if (sub) throw new Error("User Already Subscribed");
 
       setPriceIdLoading(price.id);

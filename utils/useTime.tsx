@@ -16,16 +16,12 @@ export function convertTime(timestamp: string): string {
 }
 
 export function getGreeting(): string {
+  return "morning";
   const hours = new Date().getHours();
-  if (hours >= 4 && hours < 12) {
-    return "Good Morning!";
-  } else if (hours >= 12 && hours < 17) {
-    return "Good Afternoon!";
-  } else if (hours >= 17 && hours < 20) {
-    return "Good Evening!";
-  } else {
-    return "Good Night!";
-  }
+  if (hours >= 4 && hours < 12) return "morning";
+  else if (hours >= 12 && hours < 17) return "afternoon";
+  else if (hours >= 17 && hours < 20) return "evening";
+  else return "night";
 }
 
 export function formatTime(time: number): string {

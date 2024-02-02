@@ -38,7 +38,7 @@ const LikeButton: FC<LikeButtonProps> = ({ songID, show }) => {
   const Icon = isLiked ? RiHeart3Fill : RiHeart3Line;
 
   const handleLike = async () => {
-    if (!user) return onOpen;
+    if (!user) return onOpen();
 
     if (isLiked) {
       const { error } = await supabaseClient

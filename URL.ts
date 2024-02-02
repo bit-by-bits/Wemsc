@@ -1,7 +1,6 @@
 type urlsType = { [key: string]: string };
 
 const urls = {
-  COLLECTIONS: "/collections",
   DOWNLOADS: "/downloads",
   FAVOURITES: "/favourites",
   HOME: "/",
@@ -12,6 +11,7 @@ const urls = {
   QUEUE: "/queue",
   SEARCH: "/search",
   SONG: "/song",
+  SONGS: "/songs",
 
   // API
 

@@ -14,7 +14,7 @@ export async function POST() {
     const {
       data: { user },
     } = await SUPABASE.auth.getUser();
-    if (!user) throw Error("User Not Found");
+    if (!user) throw Error("Please Login");
 
     const customer = await setOrGetUser({
       uuid: user.id || "",

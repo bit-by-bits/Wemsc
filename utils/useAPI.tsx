@@ -2,9 +2,9 @@ import { Price } from "@/Interfaces";
 
 export const fetchURL = () => {
   let URL =
-    process?.env?.NEXT_PUBLIC_SITE_URL ??
-    process?.env?.NEXT_PUBLIC_VERCEL_URL ??
-    "http://localhost:3000/";
+    process?.env?.NEXT_PUBLIC_SITE_URL || process?.env?.NEXT_PUBLIC_VERCEL_URL
+      ? "wemsc.vercel.app/"
+      : "http://localhost:3000/";
 
   URL = URL.includes("http") ? URL : `https://${URL}`;
   URL = URL.charAt(URL.length - 1) === "/" ? URL : `${URL}/`;

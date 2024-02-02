@@ -12,7 +12,6 @@ import {
   LuVolume2,
   LuVolumeX,
 } from "react-icons/lu";
-import LikeButton from "../Button/LikeButton";
 import { formatTime } from "@/utils/useTime";
 import toast from "react-hot-toast";
 import { useImageLoader } from "@/utils/useSongMeta";
@@ -22,7 +21,9 @@ import urls from "@/URL";
 import { useRouter } from "next/navigation";
 import ToolTip from "../Button/ToolTip";
 import { fetchURL } from "@/utils/useAPI";
-import { TbClockStop } from "react-icons/tb";
+import { TbClockStop, TbDownload } from "react-icons/tb";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useUser } from "@/utils/useUser";
 
 const makeIcon = (Icon, func, text) => (
   <ToolTip text={text}>
@@ -35,6 +36,9 @@ const makeIcon = (Icon, func, text) => (
 
 const Player = ({ song, URL }) => {
   const router = useRouter();
+  const { user } = useUser();
+  const supabaseClient = useSupabaseClient();
+
   const image = useImageLoader(song);
   const { ids, activeID, setID, reset } = usePlayer();
 
@@ -56,6 +60,28 @@ const Player = ({ song, URL }) => {
       onNext();
     },
   });
+
+  const onDownload = async () => {
+    const { data, error } = await supabaseClient.storage
+      .from("songs")
+      .download(song.href);
+
+    if (error) console.log(error.message);
+
+    const url = window.URL.createObjectURL(data);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `${song.label}`);
+    document.body.appendChild(link);
+    link.click();
+
+    const { error: err } = await supabaseClient
+      .from("downloads")
+      .insert({ song_id: song.id, user_id: user.id });
+
+    if (err) toast.error(err.message);
+    else toast.success("Downloaded");
+  };
 
   const onNext = () => {
     const curr = ids.findIndex(id => id === activeID);
@@ -115,7 +141,7 @@ const Player = ({ song, URL }) => {
   return (
     <div className="grid grid-cols-3 h-full w-full p-4">
       <div className="flex w-full justify-start">
-        <div className="relative flex items-center justify-center gap-4">
+        <div className="relative flex items-center justify-center gap-2">
           <Image
             radius="sm"
             src={image || "/placeholder.png"}
@@ -132,7 +158,7 @@ const Player = ({ song, URL }) => {
             </span>
             <span className="text-xs">{song.author}</span>
           </div>
-          <LikeButton songID={song.id} show={true} />
+          {makeIcon(TbDownload, onDownload, "Download Song")}
           {makeIcon(TbClockStop, reset, "Stop Song")}
         </div>
       </div>

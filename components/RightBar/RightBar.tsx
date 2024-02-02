@@ -34,11 +34,13 @@ const RightBar: FC<RightBarProps> = ({ fav, up }) => {
   );
 
   const handleOn = () => {
+    if (!user) return onOpen();
     setDND(false);
     toast.success("DND Mode Off");
   };
 
   const handleOff = () => {
+    if (!user) return onOpen();
     setDND(true);
     toast.success("DND Mode On");
   };

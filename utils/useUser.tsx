@@ -68,7 +68,7 @@ export const UserContextProvider: FC<UserProviderProps> = props => {
     return (
       supaUser?.user_metadata?.full_name ||
       supaUser?.user_metadata?.name ||
-      supaUser?.email ||
+      supaUser?.email?.split("@")[0] ||
       supaUser?.phone ||
       ""
     );
