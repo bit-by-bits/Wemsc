@@ -1,22 +1,22 @@
 import { Song } from "@/Interfaces";
 
-export interface HomeCard {
+export interface SongCard {
   item: Song;
   href: string;
 }
 
-export interface HomeMenu {
+export interface SongMenu {
   label: string;
   href: string;
   items: Song[];
 }
 
-export interface HomeCardProps {
+export interface SongCardProps {
   item: Song;
   onPlay: (id: string) => void;
 }
 
-export interface HomeMenuProps {
+export interface SongMenuProps {
   label: string;
   href: string;
   items: Song[];

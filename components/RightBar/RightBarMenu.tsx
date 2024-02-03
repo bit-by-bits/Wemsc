@@ -10,7 +10,10 @@ const RightBarMenu: FC<RightBarMenuProps> = ({ label, href, items }) => (
   >
     <div className="flex flex-row justify-between items-center w-full mb-2">
       <span className="text-white font-semibold">{label}</span>
-      <Link href={href} className="text-sm hover:text-white hover:underline">
+      <Link
+        href={href}
+        className="text-sm hover:text-white hover:underline hidden lg:block"
+      >
         See All
       </Link>
     </div>

@@ -2,7 +2,7 @@
 
 import { FC, useState } from "react";
 import { Image } from "@nextui-org/react";
-import { HomeCardProps } from "./Interfaces";
+import { SongCardProps } from "./Interfaces";
 import { useImageLoader } from "@/utils/useSongMeta";
 import LikeButton from "../Button/LikeButton";
 import PlayButton from "../Button/PlayButton";
@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import urls from "@/URL";
 import usePlayer from "../Player/PlayerUtils/usePlayer";
 
-const HomeCard: FC<HomeCardProps> = ({ item, onPlay }) => {
+const SongCard: FC<SongCardProps> = ({ item, onPlay }) => {
   const router = useRouter();
   const [show, setShow] = useState(false);
 
@@ -26,17 +26,19 @@ const HomeCard: FC<HomeCardProps> = ({ item, onPlay }) => {
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
     >
-      <Image
-        className="h-[150px] xl:h-[200px] 2xl:h-[250px] w-full bg-black"
-        src={image}
-        alt={item.label}
-        radius="sm"
-        removeWrapper
-      />
+      <div className="h-[400px] md:h-[170px] xl:h-[200px] 2xl:h-[250px] w-full bg-black rounded-lg">
+        <Image
+          className="h-full w-full object-cover"
+          src={image}
+          alt={item.label}
+          radius="sm"
+          removeWrapper
+        />
+      </div>
       <div className="flex flex-row justify-between items-center w-full">
         <div className="flex flex-col mt-2">
           <span
-            className="ml-2 text-white hover:underline cursor-pointer"
+            className="ml-2 text-lg sm:text-md text-white hover:underline cursor-pointer"
             onClick={onMore}
           >
             {item.label}
@@ -55,4 +57,4 @@ const HomeCard: FC<HomeCardProps> = ({ item, onPlay }) => {
   );
 };
 
-export default HomeCard;
+export default SongCard;

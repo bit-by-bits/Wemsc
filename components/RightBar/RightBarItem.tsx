@@ -20,14 +20,19 @@ const RightBarItem: FC<RightBarItemProps> = ({ item }) => {
     >
       <div className="flex flex-row items-center gap-2">
         <Skeleton isLoaded={!!image}>
-          <Avatar radius="sm" src={image} alt={item.label} />
+          <Avatar
+            radius="sm"
+            src={image}
+            alt={item.label}
+            className="hidden md:block"
+          />
         </Skeleton>
         <div className="flex flex-col">
           <span className="text-white text-sm">{item.label}</span>
           <span className="text-xs">{item.author}</span>
         </div>
       </div>
-      <div className="flex flex-col">
+      <div className="flex-col hidden lg:flex">
         <Skeleton isLoaded={!!last}>
           <span className="text-xs">{last}</span>
         </Skeleton>

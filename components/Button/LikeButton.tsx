@@ -28,9 +28,9 @@ const LikeButton: FC<LikeButtonProps> = ({ songID, show }) => {
         .select("*")
         .eq("user_id", user.id)
         .eq("song_id", songID)
-        .single();
+        .limit(1);
 
-      setIsLiked(!error && data);
+      setIsLiked(!error && !!data.length);
     };
 
     fetchData();
@@ -40,27 +40,29 @@ const LikeButton: FC<LikeButtonProps> = ({ songID, show }) => {
     if (!user) return onOpen();
 
     if (isLiked) {
+      setIsLiked(false);
+
       const { error } = await supabaseClient
         .from("favourites")
         .delete()
         .eq("user_id", user.id)
         .eq("song_id", songID);
 
-      if (error) toast.error(error.message);
-      else {
-        setIsLiked(false);
-        toast.success("Unliked");
-      }
+      if (error) {
+        setIsLiked(true);
+        toast.error(error.message);
+      } else toast.success("Unliked");
     } else {
+      setIsLiked(true);
+
       const { error } = await supabaseClient
         .from("favourites")
         .insert({ song_id: songID, user_id: user.id });
 
-      if (error) toast.error(error.message);
-      else {
-        setIsLiked(true);
-        toast.success("Liked");
-      }
+      if (error) {
+        setIsLiked(false);
+        toast.error(error.message);
+      } else toast.success("Liked");
     }
 
     router.refresh();

@@ -1,15 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Metadata, NextPage } from "next";
+import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import useSub from "@/components/Modal/ModalUtils/useSub";
 import { useUser } from "@/utils/useUser";
 import { postData } from "@/utils/useAPI";
 import urls from "@/URL";
 import { Avatar } from "@nextui-org/react";
-
-export const metadata: Metadata = { title: "Profile" };
 
 const Detail = (top: string, btm?: string) => (
   <div className="flex flex-col gap-2">
@@ -62,8 +60,8 @@ const Home: NextPage = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-row items-center gap-4">
-        <span className="text-4xl font-bold text-white">Profile</span>
-        {user && <Avatar src={userPhoto} alt={userName} isBordered />}
+        <span className="text-3xl sm:text-4xl font-bold text-white">Profile</span>
+        {user && <Avatar src={userPhoto} alt={userName} isBordered size="sm" />}
       </div>
       {user ? (
         <>

@@ -25,10 +25,13 @@ const fetchUploadsByUser = async (): Promise<Song[]> => {
     return [];
   }
 
+  const ID = sessionData.session?.user.id;
+  if (!ID) return [];
+
   const { data, error } = await supabase
     .from("songs")
     .select("*")
-    .eq("user_id", sessionData.session?.user.id)
+    .eq("user_id", ID)
     .order("uploaded", { ascending: false });
 
   if (error) console.log(error.message);
@@ -64,10 +67,13 @@ const fetchFavourites = async (): Promise<Song[]> => {
     return [];
   }
 
+  const ID = sessionData.session?.user.id;
+  if (!ID) return [];
+
   const { data, error } = await supabase
     .from("favourites")
     .select("*, songs(*)")
-    .eq("user_id", sessionData.session?.user?.id)
+    .eq("user_id", ID)
     .order("uploaded", { ascending: false });
 
   if (error) console.log(error.message);
@@ -79,7 +85,7 @@ const fetchFavourites = async (): Promise<Song[]> => {
 const fetchUploadByID = async (id: string): Promise<Song> => {
   const supabase = createServerComponentClient({ cookies: cookies });
 
-  if (id === "") return {} as Song;
+  if (!id || id === "") return {} as Song;
 
   const { data, error } = await supabase
     .from("songs")
@@ -94,9 +100,10 @@ const fetchUploadByID = async (id: string): Promise<Song> => {
 const fetchUploadsByIDs = async (ids: string[]): Promise<Song[]> => {
   const supabase = createServerComponentClient({ cookies: cookies });
 
-  if (ids.length === 0) return [];
+  if (!ids || ids.length === 0) return [];
 
   const numericIds = ids.map(id => parseInt(id, 10));
+  if (numericIds.some(isNaN)) return [];
 
   const { data, error } = await supabase
     .from("songs")
@@ -134,10 +141,13 @@ const fetchDownloads = async (): Promise<Song[]> => {
     return [];
   }
 
+  const ID = sessionData.session?.user.id;
+  if (!ID) return [];
+
   const { data, error } = await supabase
     .from("downloads")
     .select("*, songs(*)")
-    .eq("user_id", sessionData.session?.user?.id)
+    .eq("user_id", ID)
     .order("uploaded", { ascending: false });
 
   if (error) console.log(error.message);

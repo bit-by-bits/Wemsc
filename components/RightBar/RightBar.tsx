@@ -20,12 +20,12 @@ const RightBar: FC<RightBarProps> = ({ fav, up }) => {
   const menus = useMemo<RightBarMenuProps[]>(
     () => [
       {
-        label: "Favourite Songs",
+        label: "Favourites",
         href: urls.FAVOURITES,
         items: fav,
       },
       {
-        label: "Uploaded Songs",
+        label: "Uploaded",
         href: urls.UPLOADED,
         items: up,
       },
@@ -46,10 +46,15 @@ const RightBar: FC<RightBarProps> = ({ fav, up }) => {
   };
 
   return (
-    <div className="flex flex-col items-center h-screen p-4 bg-menu-bg transition-all duration-300 min-w-[25vw] 2xl:min-w-[20vw]">
+    <div className="hidden md:flex flex-col items-center h-screen p-2 lg:p-4 bg-menu-bg transition-all duration-300 min-w-[25vw] 2xl:min-w-[20vw]">
       <div className="flex items-center justify-between w-full mb-4">
         <div className="flex flex-row items-center gap-2">
-          <Avatar src={userPhoto} alt={userName} isBordered />
+          <Avatar
+            src={userPhoto}
+            alt={userName}
+            isBordered
+            className="hidden md:block"
+          />
           <div className="flex flex-col ml-2">
             <span className="text-sm font-bold text-white">
               {userName !== "" ? userName : "Welcome!"}
@@ -72,14 +77,17 @@ const RightBar: FC<RightBarProps> = ({ fav, up }) => {
           </div>
         </div>
 
-        <div className="flex flex-row items-center justify-center gap-2 p-1 h-10 hover:cursor-pointer">
+        <div className="flex-row items-center justify-center gap-2 p-1 h-10 hover:cursor-pointer hidden lg:flex">
           {DND ? (
             <LuBellOff
-              className="hover:text-white text-2xl"
+              className="hover:text-white text-xl"
               onClick={handleOn}
             />
           ) : (
-            <LuBell className="hover:text-white text-2xl" onClick={handleOff} />
+            <LuBell
+              className="hover:text-white text-xl xl:text-2xl"
+              onClick={handleOff}
+            />
           )}
           <RightBarTopMenu />
         </div>

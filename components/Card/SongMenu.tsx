@@ -1,12 +1,12 @@
 "use client";
 
 import { FC, useState, useEffect } from "react";
-import HomeCard from "./HomeCard";
+import SongCard from "./SongCard";
 import Link from "next/link";
-import { HomeMenuProps } from "./Interfaces";
+import { SongMenuProps } from "./Interfaces";
 import usePlay from "../Player/PlayerUtils/usePlay";
 
-const HomeMenu: FC<HomeMenuProps> = ({ label, href, items }) => {
+const SongMenu: FC<SongMenuProps> = ({ label, href, items }) => {
   const play = usePlay(items);
   const [cards, setCards] = useState(1);
 
@@ -39,15 +39,15 @@ const HomeMenu: FC<HomeMenuProps> = ({ label, href, items }) => {
           </Link>
         )}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 gap-x-6">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 gap-x-6">
         {items?.length === 0 ? (
           <div className="text-white">No songs found</div>
         ) : (
-          ITEMS.map((e, i) => <HomeCard key={i} item={e} onPlay={play} />)
+          ITEMS.map((e, i) => <SongCard key={i} item={e} onPlay={play} />)
         )}
       </div>
     </div>
   );
 };
 
-export default HomeMenu;
+export default SongMenu;

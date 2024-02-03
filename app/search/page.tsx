@@ -1,6 +1,6 @@
 import { Metadata, NextPage } from "next";
 import React from "react";
-import HomeMenu from "@/components/Home/HomeMenu";
+import SongMenu from "@/components/Card/SongMenu";
 import { searchUploads } from "@/utils/useSongs";
 
 export const metadata: Metadata = { title: "Search" };
@@ -11,7 +11,7 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = async ({ searchParams }) => {
   const uploads = await searchUploads(searchParams.title);
-  return <HomeMenu label="Searched Songs" href="" items={uploads} />;
+  return <SongMenu label="Searched Songs" href="" items={uploads} />;
 };
 
 export default Home;

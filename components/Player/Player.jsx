@@ -27,15 +27,6 @@ import { TbClockStop, TbDownload } from "react-icons/tb";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@/utils/useUser";
 
-const makeIcon = (Icon, func, text) => (
-  <ToolTip text={text}>
-    <Icon
-      className="text-xl 2xl:text-2xl cursor-pointer hover:text-white"
-      onClick={func}
-    />
-  </ToolTip>
-);
-
 const Player = ({ song, URL }) => {
   const router = useRouter();
   const { user } = useUser();
@@ -51,6 +42,7 @@ const Player = ({ song, URL }) => {
   const [timer, setTimer] = useState("0:00");
   const [device, setDevice] = useState(undefined);
   const [show, setShow] = useState(true);
+  const [width, setWidth] = useState(0);
 
   const [play, { pause, sound, duration }] = useSound(URL, {
     volume: volume,
@@ -75,9 +67,9 @@ const Player = ({ song, URL }) => {
 
     if (error) console.log(error.message);
 
-    const url = window.URL.createObjectURL(data);
+    const URL = window.URL.createObjectURL(data);
     const link = document.createElement("a");
-    link.href = url;
+    link.href = URL;
     link.setAttribute("download", `${song.label}`);
     document.body.appendChild(link);
     link.click();
@@ -157,42 +149,60 @@ const Player = ({ song, URL }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [progress]);
 
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const makeIcon = (Icon, func, text, min = 0) => {
+    return width >= min ? (
+      <ToolTip text={text}>
+        <Icon
+          className="text-xl 2xl:text-2xl cursor-pointer hover:text-white transition-all duration-300 ease-in-out"
+          onClick={func}
+        />
+      </ToolTip>
+    ) : null;
+  };
+
   return (
-    <div className="grid grid-cols-3 h-full w-full p-4">
-      <div className="flex w-full justify-start">
+    <div className="flex justify-between items-center lg:grid lg:grid-cols-3 h-full w-full p-4 gap-4">
+      <div className="flex w-max lg:w-full justify-start">
         <div className="relative flex items-center justify-center gap-2">
-          {show && (
+          {width >= 640 && show && (
             <>
               <Image
                 radius="sm"
                 src={image || "/placeholder.png"}
                 alt={song.label}
                 removeWrapper
-                className="absolute max-h-[200px] min-w-[18vw] 2xl:min-w-[15vw] 2xl:min-h-[250px] transform -translate-y-[calc(100%+1rem)] -left-4 top-0"
+                className="absolute md:max-h-[200px] min-w-[18vw] 2xl:min-w-[15vw] 2xl:min-h-[250px] transform -translate-y-[calc(100%+1.5rem)] -left-4 top-0"
               />
               <MdClear
-                className="text-2xl hover:text-red-500 cursor-pointer transition-all duration-300 ease-in-out absolute -translate-y-[calc(100%+1.5rem)] top-0 -left-2 z-10 text-white"
+                className="text-2xl hover:text-red-500 cursor-pointer transition-all duration-300 ease-in-out absolute -translate-y-[calc(100%+2rem)] top-0 -left-2 z-10 text-white"
                 onClick={onClear}
               />
             </>
           )}
-          <div className="flex flex-col">
+          <div className="hidden sm:flex flex-col mr-2">
             <span
-              className="text-white text-sm hover:underline cursor-pointer"
+              className="text-white text-sm hover:underline cursor-pointer w-max"
               onClick={onMore}
             >
               {song.label}
             </span>
-            <span className="text-xs">{song.author}</span>
+            <span className="text-xs w-max">{song.author}</span>
           </div>
           {makeIcon(TbDownload, onDownload, "Download Song")}
           {makeIcon(TbClockStop, reset, "Stop Song")}
         </div>
       </div>
 
-      <div className="w-full h-full flex flex-col items-center justify-center gap-2">
+      <div className="w-max lg:w-full h-full flex flex-col items-center justify-center gap-2">
         <div className="flex items-center justify-center gap-4">
-          {makeIcon(RiSlowDownFill, onSlow, "Slow Down Song")}
+          {makeIcon(RiSlowDownFill, onSlow, "Slow Down Song", 380)}
           {makeIcon(LuShuffle, onShuffle, "Shuffle Songs")}
           {makeIcon(LuSkipBack, onPrev, "Previous Song")}
           <div
@@ -207,7 +217,7 @@ const Player = ({ song, URL }) => {
           </div>
           {makeIcon(LuSkipForward, onNext, "Next Song")}
           {makeIcon(LuRepeat, onRepeat, "Repeat Song")}
-          {makeIcon(RiSpeedUpFill, onFast, "Speed Up Song")}
+          {makeIcon(RiSpeedUpFill, onFast, "Speed Up Song", 380)}
         </div>
         <div className="flex items-center justify-center gap-4 w-full">
           <span className="text-sm">{timer}</span>
@@ -227,7 +237,7 @@ const Player = ({ song, URL }) => {
         </div>
       </div>
 
-      <div className="flex w-full justify-end items-center gap-2 pr-2">
+      <div className="flex w-max lg:w-full justify-end items-center gap-2 sm:pr-2">
         {volume
           ? makeIcon(LuVolume2, toggleMute, "Mute")
           : makeIcon(LuVolumeX, toggleMute, "Unmute")}
@@ -236,12 +246,12 @@ const Player = ({ song, URL }) => {
           minValue={0}
           maxValue={1}
           step={0.01}
-          className="w-full max-w-[100px]"
           value={volume ?? 0}
+          className="w-full max-w-[100px] hidden md:block"
           onChange={vol => setVolume(vol)}
         />
-        {makeIcon(MdHeadset, onMore, "Song Info")}
-        {makeIcon(PiQueue, onQueue, "Queue")}
+        {makeIcon(MdHeadset, onMore, "Song Info", 450)}
+        {makeIcon(PiQueue, onQueue, "Queue", 450)}
         {makeIcon(
           MdDevices,
           () => {},
@@ -250,8 +260,9 @@ const Player = ({ song, URL }) => {
             <div className="text-xs">{device?.agent}</div>
             <div className="text-xs mt-2 font-semibold">Song: {song.label}</div>
           </div>,
+          768,
         )}
-        {makeIcon(MdShare, onShare, "Share")}
+        {makeIcon(MdShare, onShare, "Share", 768)}
       </div>
     </div>
   );

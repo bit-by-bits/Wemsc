@@ -17,6 +17,7 @@ export function convertTime(timestamp: string): string {
 
 export function getGreeting(): string {
   const time = new Date().toLocaleTimeString("en-US", {
+    hour12: false,
     timeZone: "Asia/Kolkata",
   });
 

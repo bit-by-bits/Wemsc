@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata, NextPage } from "next";
 import { fetchUploadsByIDs } from "@/utils/useSongs";
-import HomeMenu from "@/components/Home/HomeMenu";
+import SongMenu from "@/components/Card/SongMenu";
 
 export const metadata: Metadata = { title: "Queue" };
 
@@ -19,8 +19,9 @@ const Home: NextPage<QueueProps> = async ({ params }) => {
       </div>
     );
   }
+
   const uploads = await fetchUploadsByIDs(IDs);
-  return <HomeMenu label="Queued Songs" href="" items={uploads} />;
+  return <SongMenu label="Queued Songs" href="" items={uploads} />;
 };
 
 export default Home;
