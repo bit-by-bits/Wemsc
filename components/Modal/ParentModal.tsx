@@ -10,7 +10,11 @@ const ParentModal: FC<ParentModalProps> = ({
   children,
 }) => {
   return (
-    <Modal isOpen={isOpen} onOpenChange={onChange}>
+    <Modal
+      isOpen={isOpen}
+      onOpenChange={onChange}
+      className="transform -translate-y-[15vh] sm:translate-y-0"
+    >
       <ModalContent className="border border-neutral-700 rounded-md bg-main-bg focus:outline-none scale-80">
         {title !== "" && (
           <ModalHeader>

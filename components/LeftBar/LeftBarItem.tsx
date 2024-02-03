@@ -11,9 +11,21 @@ const LeftBarItem: FC<LeftBarItemProps> = ({ item, isOpen }) => {
       }`}
     >
       {item.active ? (
-        <item.iconFilled className={isOpen ? "hidden lg:block text-xl" : "text-xl sm:text-2xl md:text-xl lg:text-2xl w-full"} />
+        <item.iconFilled
+          className={
+            isOpen
+              ? "hidden lg:block text-xl"
+              : "text-xl sm:text-2xl md:text-xl lg:text-2xl w-full"
+          }
+        />
       ) : (
-        <item.iconOutline className={isOpen ? "hidden lg:block text-xl" : "text-xl sm:text-2xl md:text-xl lg:text-2xl w-full"} />
+        <item.iconOutline
+          className={
+            isOpen
+              ? "hidden lg:block text-xl"
+              : "text-xl sm:text-2xl md:text-xl lg:text-2xl w-full"
+          }
+        />
       )}
       {isOpen && <span className="ml-2 lg:ml-0">{item.label}</span>}
     </Link>

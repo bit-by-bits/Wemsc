@@ -145,10 +145,16 @@ const LeftBar: FC = () => {
       <div
         className={`flex flex-${
           isOpen ? "row" : "col gap-4"
-        } items-center justify-between w-full mb-2 lg:mb-4`}
+        } items-center justify-between w-full md:mb-2 lg:mb-4`}
       >
         <Link href={urls.HOME}>
-          <Image src="/wemsc.png" alt="logo" height={50} width={50} />
+          <Image
+            src="/wemsc.png"
+            alt="logo"
+            height={50}
+            width={50}
+            className="scale-125 md:scale-100"
+          />
         </Link>
         <div
           className={`hover:cursor-pointer ${show ? "" : "hidden"}`}

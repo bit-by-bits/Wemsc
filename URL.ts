@@ -5,7 +5,6 @@ const urls = {
   FAVOURITES: "/favourites",
   HOME: "/",
   UPLOADED: "/uploaded",
-  MY_PLAYLISTS: "/my-playlists",
   NOTIFICATIONS: "/notifications",
   PROFILE: "/profile",
   QUEUE: "/queue",

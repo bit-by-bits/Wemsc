@@ -41,7 +41,7 @@ const TopBarSearch: FC<TopBarSearchProps> = ({
         onChange={handleChange}
         onBlur={handleBlur}
         onFocus={handleFocus}
-        className="w-full h-10 px-10 rounded-full bg-white text-gray-800 placeholder-gray-500 outline-none appearance-none border-0 text-sm"
+        className="w-full h-10 px-10 rounded-full bg-white text-gray-800 placeholder-gray-500 outline-none appearance-none border-0 text-sm whitespace-nowrap overflow-ellipsis"
         placeholder="Search for artists, songs, or albums"
       />
       <div className="flex items-center absolute inset-y-0 right-0 pr-3">

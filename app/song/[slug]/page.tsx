@@ -18,7 +18,9 @@ const SongDetails: FC<SongDetailsProps> = async ({ song }) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-row items-center gap-2">
-        <span className="text-3xl sm:text-4xl font-bold text-white">{song.label}</span>
+        <span className="text-3xl sm:text-4xl font-bold text-white">
+          {song.label}
+        </span>
         <LikeButton songID={song.id} show={true} />
       </div>
 
