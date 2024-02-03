@@ -56,13 +56,6 @@ const LeftBar: FC = () => {
   const libraries = useMemo<LeftBarItem[]>(
     () => [
       {
-        label: "Downloads",
-        iconOutline: RiDownloadCloudLine,
-        iconFilled: RiDownloadCloudFill,
-        href: urls.DOWNLOADS,
-        active: path === urls.DOWNLOADS,
-      },
-      {
         label: "Favourites",
         iconOutline: RiHeart3Line,
         iconFilled: RiHeart3Fill,
@@ -70,11 +63,18 @@ const LeftBar: FC = () => {
         active: path === urls.FAVOURITES,
       },
       {
-        label: "Local Files",
+        label: "Uploaded",
         iconOutline: RiFolderSharedLine,
         iconFilled: RiFolderSharedFill,
-        href: urls.LOCAL_FILES,
-        active: path === urls.LOCAL_FILES,
+        href: urls.UPLOADED,
+        active: path === urls.UPLOADED,
+      },
+      {
+        label: "Downloads",
+        iconOutline: RiDownloadCloudLine,
+        iconFilled: RiDownloadCloudFill,
+        href: urls.DOWNLOADS,
+        active: path === urls.DOWNLOADS,
       },
     ],
     [path],

@@ -1,7 +1,9 @@
 import React from "react";
-import { NextPage } from "next";
+import { Metadata, NextPage } from "next";
 import { fetchFavourites } from "@/utils/useSongs";
 import HomeMenu from "@/components/Home/HomeMenu";
+
+export const metadata: Metadata = { title: "Favourites" };
 
 const Home: NextPage = async () => {
   const favourites = await fetchFavourites();

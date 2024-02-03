@@ -4,7 +4,7 @@ const urls = {
   DOWNLOADS: "/downloads",
   FAVOURITES: "/favourites",
   HOME: "/",
-  LOCAL_FILES: "/local-files",
+  UPLOADED: "/uploaded",
   MY_PLAYLISTS: "/my-playlists",
   NOTIFICATIONS: "/notifications",
   PROFILE: "/profile",

@@ -1,5 +1,7 @@
 import React from "react";
-import { NextPage } from "next";
+import { Metadata, NextPage } from "next";
+
+export const metadata: Metadata = { title: "Notifications" };
 
 const Home: NextPage = () => {
   return (

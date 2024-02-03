@@ -26,7 +26,7 @@ const RightBar: FC<RightBarProps> = ({ fav, up }) => {
       },
       {
         label: "Uploaded Songs",
-        href: urls.LOCAL_FILES,
+        href: urls.UPLOADED,
         items: up,
       },
     ],

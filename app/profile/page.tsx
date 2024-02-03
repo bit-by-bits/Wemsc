@@ -1,13 +1,15 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { NextPage } from "next";
+import { Metadata, NextPage } from "next";
 import { useRouter } from "next/navigation";
 import useSub from "@/components/Modal/ModalUtils/useSub";
 import { useUser } from "@/utils/useUser";
 import { postData } from "@/utils/useAPI";
 import urls from "@/URL";
 import { Avatar } from "@nextui-org/react";
+
+export const metadata: Metadata = { title: "Profile" };
 
 const Detail = (top: string, btm?: string) => (
   <div className="flex flex-col gap-2">

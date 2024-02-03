@@ -16,7 +16,11 @@ export function convertTime(timestamp: string): string {
 }
 
 export function getGreeting(): string {
-  const hours = new Date().getHours();
+  const time = new Date().toLocaleTimeString("en-US", {
+    timeZone: "Asia/Kolkata",
+  });
+
+  const hours = parseInt(time.split(":")[0]);
   if (hours >= 4 && hours < 12) return "morning";
   else if (hours >= 12 && hours < 17) return "afternoon";
   else if (hours >= 17 && hours < 20) return "evening";

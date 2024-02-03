@@ -1,7 +1,9 @@
 import React from "react";
-import { NextPage } from "next";
+import { Metadata, NextPage } from "next";
 import { fetchUploadsByIDs } from "@/utils/useSongs";
 import HomeMenu from "@/components/Home/HomeMenu";
+
+export const metadata: Metadata = { title: "Queue" };
 
 interface QueueProps {
   params: { slug: string };

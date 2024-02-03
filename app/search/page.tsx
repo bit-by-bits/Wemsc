@@ -1,7 +1,9 @@
-import { NextPage } from "next";
+import { Metadata, NextPage } from "next";
 import React from "react";
 import HomeMenu from "@/components/Home/HomeMenu";
 import { searchUploads } from "@/utils/useSongs";
+
+export const metadata: Metadata = { title: "Search" };
 
 interface HomeProps {
   searchParams: { title: string };

@@ -1,10 +1,12 @@
 "use client";
 
 import { FC } from "react";
-import { NextPage } from "next";
+import { Metadata, NextPage } from "next";
 import { useFetchByID } from "@/components/Player/PlayerUtils/usePlayerID";
 import { Song } from "@/Interfaces";
 import LikeButton from "@/components/Button/LikeButton";
+
+export const metadata: Metadata = { title: "Song Info" };
 
 interface SongDetailsProps {
   song: Song;

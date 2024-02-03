@@ -30,7 +30,7 @@ const LikeButton: FC<LikeButtonProps> = ({ songID, show }) => {
         .eq("song_id", songID)
         .single();
 
-      if (!error && data) setIsLiked(true);
+      setIsLiked(!error && data);
     };
 
     fetchData();

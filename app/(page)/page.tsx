@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import urls from "@/URL";
 import HomeMenu from "@/components/Home/HomeMenu";
 import {
+  fetchDownloads,
   fetchFavourites,
   fetchUploads,
   fetchUploadsByUser,
@@ -12,9 +13,10 @@ import { Image } from "@nextui-org/react";
 
 const Home: NextPage = async () => {
   const greeting = getGreeting();
-  const uploads = await fetchUploads();
+  const songs = await fetchUploads();
   const favourites = await fetchFavourites();
-  const myUploads = await fetchUploadsByUser();
+  const uploads = await fetchUploadsByUser();
+  const downloads = await fetchDownloads();
 
   return (
     <div className="flex flex-col">
@@ -31,16 +33,17 @@ const Home: NextPage = async () => {
           </span>
         </div>
       </div>
-      <HomeMenu label="New Songs" href={urls.SONGS} items={uploads} />
+      <HomeMenu label="New Songs" href={urls.SONGS} items={songs} />
       <HomeMenu
         label="Favourite Songs"
         href={urls.FAVOURITES}
         items={favourites}
       />
+      <HomeMenu label="Uploaded Songs" href={urls.UPLOADED} items={uploads} />
       <HomeMenu
-        label="Uploaded Songs"
-        href={urls.LOCAL_FILES}
-        items={myUploads}
+        label="Downloaded Songs"
+        href={urls.DOWNLOADS}
+        items={downloads}
       />
     </div>
   );
