@@ -27,7 +27,7 @@ const LeftBarItem: FC<LeftBarItemProps> = ({ item, isOpen }) => {
           }
         />
       )}
-      {isOpen && <span className="ml-2 lg:ml-0">{item.label}</span>}
+      {isOpen && <span className="text-sm ml-2 lg:ml-0">{item.label}</span>}
     </Link>
   );
 };

@@ -99,26 +99,23 @@ const LeftBar: FC = () => {
   );
 
   const extras = useMemo<LeftBarItem[]>(
-    () =>
-      show
-        ? []
-        : [
-            {
-              label: "Profile",
-              iconOutline: RiUser3Line,
-              iconFilled: RiUser3Fill,
-              href: urls.PROFILE,
-              active: path === urls.PROFILE,
-            },
-            {
-              label: "Notifications",
-              iconOutline: IoNotificationsOutline,
-              iconFilled: IoNotifications,
-              href: urls.NOTIFICATIONS,
-              active: path === urls.NOTIFICATIONS,
-            },
-          ],
-    [path, show],
+    () => [
+      {
+        label: "Profile",
+        iconOutline: RiUser3Line,
+        iconFilled: RiUser3Fill,
+        href: urls.PROFILE,
+        active: path === urls.PROFILE,
+      },
+      {
+        label: "Notifications",
+        iconOutline: IoNotificationsOutline,
+        iconFilled: IoNotifications,
+        href: urls.NOTIFICATIONS,
+        active: path === urls.NOTIFICATIONS,
+      },
+    ],
+    [path],
   );
 
   const menus = useMemo<LeftBarMenu[]>(
@@ -131,9 +128,9 @@ const LeftBar: FC = () => {
         label: "LIBRARIES",
         items: libraries,
       },
-      { label: "EXTRAS", items: extras },
+      show ? { label: "", items: [] } : { label: "EXTRAS", items: extras },
     ],
-    [features, libraries, extras],
+    [features, libraries, extras, show],
   );
 
   const toggleIsOpen = () => setIsOpen(prev => !prev);
@@ -149,10 +146,10 @@ const LeftBar: FC = () => {
       >
         <Link href={urls.HOME}>
           <Image
-            src="/wemsc.png"
+            src={isOpen ? "/logo-max.png" : "/logo-min.png"}
             alt="logo"
             height={50}
-            width={50}
+            width={isOpen ? 120 : 50}
             className="scale-125 md:scale-100"
           />
         </Link>

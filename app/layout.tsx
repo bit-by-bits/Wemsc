@@ -24,20 +24,20 @@ interface RootLayoutProps {
 }
 
 const rubik = Rubik({
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
   style: ["normal", "italic"],
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 } as RubikFontOptions);
 
 export const metadata: Metadata = {
   title: {
-    default: "Wemsc - Web Music Streaming Player",
+    default: "Wemsc | Web Music Streaming",
     template: "%s | Wemsc",
   },
   description:
     "Explore Wemsc, a cutting-edge web music streaming player powered by Next.js, Tailwind CSS, Supabase, and Stripe. Enjoy seamless playback, real-time updates, and secure authentication for an immersive music experience.",
   keywords:
-    "Wemsc, Music Player, Web Music Streaming, Next.js, Tailwind CSS, Supabase, Stripe",
+    "Wemsc, Music Player, Web Music Streaming, Next.js, Tailwind CSS, Supabase, Stripe, Web Development, Web Design, Web Music Player, Web Music Streaming Player",
 };
 
 const RootLayout: FC<RootLayoutProps> = async ({ children }) => {

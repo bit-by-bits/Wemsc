@@ -39,9 +39,9 @@ const RightBarTopMenu: FC = () => {
         className="cursor-pointer hover:text-white"
       />
       {isMenuOpen && (
-        <div className="bg-black text-white absolute top-10 right-0 flex flex-col rounded p-2 max-h-[200px] overflow-y-auto scrollbar-hide max-w-[200px] min-w-[150px] z-50">
+        <div className="bg-black absolute top-10 right-0 flex flex-col rounded p-2 max-h-[200px] overflow-y-auto scrollbar-hide min-w-max z-50 text-sm border border-primary-text">
           {items?.length === 0 ? (
-            <div className="p-2 text-center">No items</div>
+            <div className="p-2 text-center">No unread messages.</div>
           ) : (
             items?.map((e, i) => (
               <div
@@ -54,7 +54,7 @@ const RightBarTopMenu: FC = () => {
           )}
           <button
             onClick={seeAll}
-            className="py-2 px-4 bg-link-active hover:bg-opacity-75 text-white w-full rounded-lg"
+            className="p-2 bg-link-active hover:bg-opacity-75 text-white w-full rounded-lg"
           >
             See All
           </button>
